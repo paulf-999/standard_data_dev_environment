@@ -38,6 +38,10 @@ test:
 clean:
 	@echo "${INFO}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
 
+
+abc:
+	bash src/setup/configure_tools/configure_vscode.sh
+
 # Phony targets
 .PHONY: all deps install run test clean
 

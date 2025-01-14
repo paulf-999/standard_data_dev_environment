@@ -14,14 +14,43 @@ source "${SCRIPT_DIR}/../../scripts/sh/shell_utils.sh"
 EXTENSIONS_PYTHON=(
     "demystifying-javascript.python-extensions-pack"  # Python Extension Pack
     "ms-python.black-formatter"
+    "ms-python.flake8"
     "ms-python.isort"
 )
 
-# Terraform Extension Pack
-EXTENSIONS_TERRAFORM=(
+EXTENSIONS_DATA_TOOLING=(
     "hashicorp.terraform"
     "innoverio.vscode-dbt-power-user"
     "dorzey.vscode-sqlfluff"
+    # Docker extns
+    "ms-azuretools.vscode-docker"
+    "ms-vscode-remote.remote-containers"
+    "ms-toolsai.datawrangler"
+    "mtxr.sqltools"
+    "postman.postman-for-vscode"
+)
+
+# Extensions for Markdown, Jinja, and related formats
+EXTENSIONS_FORMATTING=(
+    "samuelcolvin.jinjahtml"
+    "davidanson.vscode-markdownlint"
+    "esbenp.prettier-vscode"
+    "mohsen1.prettify-json"
+    "wayou.vscode-todo-highlight"
+    "davidanson.vscode-markdownlint"
+)
+
+# Additional Extensions
+EXTENSIONS_MISC=(
+    "github.copilot"
+    "aaron-bond.better-comments"
+    "codezombiech.gitignore"
+    "samuelcolvin.jinjahtml"
+    "christian-kohler.path-intellisense"
+    "redhat.vscode-yaml"
+    "pkief.material-icon-theme"
+    "mechatroner.rainbow-csv"
+    "grapecity.gc-excelviewer"
 )
 
 # Uninstall Extensions by Category
@@ -47,8 +76,8 @@ EXTENSIONS_TO_UNINSTALL=(
     "alefragnani.project-manager"  # Project Manager (can be linked to version control management)
     "deerawan.vscode-dash"
     "ms-vscode.test-adapter-converter"
+    "sourcery.sourcery"
 )
-
 
 #=======================================================================
 # Functions
@@ -83,6 +112,15 @@ uninstall_extensions() {
 # Install Extensions by Category (passing arrays directly)
 log_message "${DEBUG}" "Installing Python extensions"
 install_extensions "${EXTENSIONS_PYTHON[@]}"
+
+log_message "${DEBUG}" "Installing Data-Tooling-related extensions"
+install_extensions "${EXTENSIONS_DATA_TOOLING[@]}"
+
+log_message "${DEBUG}" "Installing Formatting-related extensions"
+install_extensions "${EXTENSIONS_FORMATTING[@]}"
+
+log_message "${DEBUG}" "Installing miscellaneous extensions"
+install_extensions "${EXTENSIONS_MISC[@]}"
 
 log_message "${DEBUG}" "Uninstalling Python extensions"
 uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}" && echo
