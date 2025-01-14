@@ -4,8 +4,6 @@
 # Function Name: install_unix_packages
 # Description: Installs Unix packages listed in unix_packages.txt
 #              while skipping certain packages for macOS.
-#
-# Arguments: None
 #=======================================================================
 
 #=======================================================================
