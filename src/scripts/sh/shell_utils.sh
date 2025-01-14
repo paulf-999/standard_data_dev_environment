@@ -1,5 +1,6 @@
 #!/bin/bash
-# shellcheck disable=all
+# ignore shell warnings, re: variables being unused
+# shellcheck disable=SC2034
 
 #=======================================================================
 # Variables
