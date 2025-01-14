@@ -19,7 +19,7 @@ repos:
           - id: git_branch_name_validation # Custom Git branch validation hook
             name: Git checks - Git branch name validation
             description: This hook validates the Git branch name.
-            entry: src/sh/pre_commit_hooks/git_validate_branch_name.sh
+            entry: src/scripts/sh/pre_commit_hooks/git_validate_branch_name.sh
             language: script
             pass_filenames: false
     # SQLFluff - linter for SQL
