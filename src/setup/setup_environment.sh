@@ -67,7 +67,7 @@ setup_environment_variables() {
 
 # Configure development tools
 configure_dev_tools() {
-    print_section_header "${DEBUG}" "Step 7: Configure development tools"
+    print_section_header "${DEBUG}" "Step 5: Configure development tools"
 
     # Configure VSCode
     log_message "${DEBUG}" "Configure VSCode"
@@ -101,6 +101,7 @@ configure_dev_tools() {
 # install_unix_packages  # 1. Install system dependencies first
 install_python_and_pip  # 2. Install Python and pip after system setup
 install_python_packages  # 3. Install Python packages next
-# setup_environment_variables  # 4. Set environment variables after core software installation
-# configure_dev_tools  # 6. Configure SQLFluff after dev tools
-log_message "${INFO}" "Environment setup completed successfully."
+setup_environment_variables  # 4. Set environment variables after core software installation
+# configure_dev_tools  # 5. Configure SQLFluff after dev tools
+
+log_message "${INFO}" "Environment setup complete." && echo

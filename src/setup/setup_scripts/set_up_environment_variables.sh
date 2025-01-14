@@ -4,11 +4,11 @@
 # Variables
 #=======================================================================
 
-# Get the directory where the script is located
+# Get the directory of the current script
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
-# Source common shell script utilities using the dynamic path
-source "${SCRIPT_DIR}/../scripts/sh/shell_utils.sh"
+# Source shell_utils.sh relative to this script
+source "${SCRIPT_DIR}/../../scripts/sh/shell_utils.sh"
 
 # Directory for installation dependencies
 INSTALL_DEP_DIR="src/setup/install_dependencies"
