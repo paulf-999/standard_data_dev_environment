@@ -23,20 +23,20 @@ CONFIG_FILE := config.yaml
 all: deps install clean
 
 deps:
-	@echo "${DEBUG}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}"
 	@bash src/setup/setup_environment.sh
 
 install:
-	@echo "${DEBUG}\nCalled makefile target 'install'. Run the setup & install targets.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'install'. Run the setup & install targets.${COLOUR_OFF}"
 
 run:
-	@echo "${DEBUG}\nCalled makefile target 'run'. Launch service.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'run'. Launch service.${COLOUR_OFF}"
 
 test:
-	@echo "${DEBUG}\nCalled makefile target 'test'. Perform any required tests.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'test'. Perform any required tests.${COLOUR_OFF}"
 
 clean:
-	@echo "${DEBUG}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
 
 # Phony targets
 .PHONY: all deps install run test clean

@@ -89,7 +89,7 @@ install_unix_packages_macos() {
 
 # Function to install Unix packages (Master function)
 install_unix_packages() {
-    print_section_header "${DEBUG_DETAILS}" "Step 1: Installing Unix packages"
+    print_section_header "${DEBUG}" "Step 1: Installing Unix packages"
 
     # Inform the user about the sudo password prompt
     log_message "${DEBUG_DETAILS}" "Note: You will be prompted for your sudo password during package installation."
