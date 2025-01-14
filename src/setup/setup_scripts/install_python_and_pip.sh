@@ -9,11 +9,11 @@
 # Variables
 #=======================================================================
 
-# Get the directory where the script is located
+# Get the directory of the current script
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
-# Source common shell script utilities using the dynamic path
-source "${SCRIPT_DIR}/../scripts/sh/shell_utils.sh"
+# Source shell_utils.sh relative to this script
+source "${SCRIPT_DIR}/../../scripts/sh/shell_utils.sh"
 
 #=======================================================================
 # Helper Functions
@@ -21,7 +21,6 @@ source "${SCRIPT_DIR}/../scripts/sh/shell_utils.sh"
 
 # Function to install Python and pip
 install_python_and_pip() {
-    print_section_header "${DEBUG}" "Step 2: Instal Python and pip"
 
     # Check the OS type
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -78,3 +77,9 @@ install_python_and_pip() {
         exit 1
     fi
 }
+
+#=======================================================================
+# Main Function
+#=======================================================================
+
+install_python_and_pip

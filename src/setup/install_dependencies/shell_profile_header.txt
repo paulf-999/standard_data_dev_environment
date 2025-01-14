@@ -1,0 +1,14 @@
+# Add directories to your PATH variable
+#----------------------------------------
+# Add the filepath where Python packages are installed to the PATH variable
+export PATH=$PATH:$HOME/.local/bin
+
+#------------------------------------------------------------------------------------
+# WSL-specific env vars
+#------------------------------------------------------------------------------------
+# This is required to allow an external browser window to be launched from WSL.
+export BROWSER=wslview
+
+#------------------------------------------------------------------------------------
+# End of custom environment variables creation.
+#------------------------------------------------------------------------------------
