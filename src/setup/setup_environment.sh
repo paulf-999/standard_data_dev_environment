@@ -20,36 +20,20 @@
 # Get the directory where the script is located
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
-# Source common shell script utilities using the dynamic path
-source "${SCRIPT_DIR}/../scripts/sh/shell_utils.sh"
-
 # Directory for installation dependencies
 INSTALL_DEP_DIR="src/setup/install_dependencies"
+
+# Source common shell script utilities using the dynamic path
+source "${SCRIPT_DIR}/../scripts/sh/shell_utils.sh"
+source "${INSTALL_DEP_DIR}/install_unix_packages.sh"
 
 #=======================================================================
 # Functions
 #=======================================================================
 
-# Function to install Ubuntu packages
-install_ubuntu_packages() {
-    print_section_header "${INFO}" "Step 1: Installing Ubuntu packages"
-
-    # Update Ubuntu packages quietly
-    sudo apt-get -yqq update
-
-    # Add WSL utilities
-    sudo add-apt-repository -y ppa:wslutilities/wslu 2>/dev/null
-
-    # Install the additional Ubuntu packages listed within ubuntu_packages.txt
-    sudo apt -yqq install "$(cat ${INSTALL_DEP_DIR}/ubuntu_packages.txt)" || {
-        log_message "${ERROR}" "Failed to install Ubuntu packages."
-        exit 1
-    }
-}
-
 # Function to install Python and pip
 install_python_and_pip() {
-    print_section_header "${INFO}" "Step 2: Installing Python and pip"
+    print_section_header "${DEBUG_DETAILS}" "Step 2: Installing Python and pip"
 
     # Install Python and pip
     sudo apt-get install -y python3 python3-pip || {
@@ -66,7 +50,7 @@ install_python_and_pip() {
 
 # Function to install Python packages
 install_python_packages() {
-    print_section_header "${INFO}" "Step 3: Installing Python packages"
+    print_section_header "${DEBUG_DETAILS}" "Step 3: Installing Python packages"
 
     # Install the Python packages listed within requirements.txt
     pip3 install --disable-pip-version-check -r ${INSTALL_DEP_DIR}/requirements.txt -q || {
@@ -77,14 +61,14 @@ install_python_packages() {
 
 # Function to configure development tools
 configure_dev_tools() {
-    print_section_header "${INFO}" "Step 4: Configuring development tools"
+    print_section_header "${DEBUG_DETAILS}" "Step 4: Configuring development tools"
     bash configure_tools/configure_vscode.sh  # Configure Visual Studio Code
     bash configure_tools/configure_airflow.sh  # Configure Airflow
 }
 
 # Function to set up environment variables
 setup_environment_variables() {
-    print_section_header "${INFO}" "Step 5: Setting up environment variables"
+    print_section_header "${DEBUG_DETAILS}" "Step 5: Setting up environment variables"
 
     # Add environment variables to shell configuration
     sh src/sh/common/add_env_vars_to_shell_header.sh
@@ -98,7 +82,7 @@ setup_environment_variables() {
 
 # Function to configure SQLFluff
 configure_sqlfluff() {
-    print_section_header "${INFO}" "Step 6: Configuring SQLFluff"
+    print_section_header "${DEBUG_DETAILS}" "Step 6: Configuring SQLFluff"
 
     # Generate SQLFluff configuration from template
     j2 templates/.sqlfluff_template.j2 -o ~/.sqlfluff || {
@@ -109,7 +93,7 @@ configure_sqlfluff() {
 
 # Function to install ZSH and ohmyzsh
 install_zsh_and_ohmyzsh() {
-    print_section_header "${INFO}" "Step 7: Installing ZSH and ohmyzsh"
+    print_section_header "${DEBUG_DETAILS}" "Step 7: Installing ZSH and ohmyzsh"
 
     # Run ZSH/ohmyzsh installation script
     bash src/scripts/sh/ohmyzsh/install_zsh_and_ohmyzsh.sh || {
@@ -122,10 +106,8 @@ install_zsh_and_ohmyzsh() {
 # Main Script Logic
 #=======================================================================
 
-log_message "${DEBUG}" "Starting environment setup..."
-
 # Execute setup steps in sequence
-install_ubuntu_packages           # Install system dependencies first
+install_unix_packages           # Install system dependencies first
 # install_python_and_pip            # Install Python and pip after system setup
 # install_python_packages           # Install Python packages next
 # setup_environment_variables       # Set environment variables after core software installation
@@ -133,4 +115,4 @@ install_ubuntu_packages           # Install system dependencies first
 # configure_sqlfluff                # Configure SQLFluff after dev tools
 # install_zsh_and_ohmyzsh           # Install ZSH and ohmyzsh as the last step
 
-log_message "${DEBUG}" "Environment setup completed successfully."
+log_message "${INFO}" "Environment setup completed successfully." && echo
