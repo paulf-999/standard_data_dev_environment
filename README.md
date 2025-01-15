@@ -1,84 +1,33 @@
-# Project Title
+# Standard Data Dev Environment
 
-Simple one-line overview of use / purpose of the project.
-
+This repository contains automation scripts intended to set up and enhance developers' environment.
 ---
 
-## Contents
+## Background
 
-1. Summary
-2. Getting started
-    * Prerequisites
-    * Installation
-    * How-to Run
-3. Git Branching Strategy
-4. Help
-5. Folder Contents
+* Many standard data tools are designed for Linux systems.
+* This repo contains a variety of scripts to automate the setup of data tools/technologies on Linux.
 
----
+## Installation
 
-## 1. Summary
-
-<Brief overview of the purpose of the project and it's benefit>
-
-### Technologies Used
-
-<List of technologies used, e.g. AWS, Python, Snowflake>
-
----
-
-## 2. Getting started
-
-### Prerequisites
-
-<Describe any prerequisites libraries / configuration / other needed for the project, e.g.:>
-
-Before you begin, ensure you have met the following requirements:
-
-* You have installed the latest version of <coding_language/dependency/requirement_1>
-* You have a <Mac/Windows>
-
-### Installation
-
-* How / where to download your program
-* Any modifications needed to be made to files / folders
-
-### How-to Run
-
-* How to run the program
-* Step-by-step bullets
+From the root of this repository, execute the following command in your terminal:
 
 ```bash
-code blocks for commands
+make deps
 ```
 
----
+### Description - What is this Command Doing?
 
-## 3. Git Branching Strategy
+Expand the menu below for more details.
 
-See [docs/git_branching_strategy.md](docs/git_branching_strategy.md).
+<details>
 
----
+<summary>Expand for detailed instructions</summary>
 
-## 4. Help
+This make command performs the following actions:
 
-Describe troubleshooting steps for common problems or issues. E.g.
+* Installs the necessary Ubuntu packages.
+* Installs required Python packages.
+* Configures your development environment according to our standard setup.
 
-```bash
-commands to run if specific messages are encountered
-```
-
----
-
-## 5. Folder Contents
-
-| Folder | Description                  |
-| -------| -----------------------------|
-| folder | Contains files related to... |
-| folder | Contains files related to... |
-
----
-
-## Credits
-
-This is an adapted version of the following [README](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc).
+By following these steps, you'll have a Unix-based development environment ready to use, empowering you to work seamlessly with a variety of data tools originally designed for Linux systems.
