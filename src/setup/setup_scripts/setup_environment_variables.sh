@@ -30,6 +30,12 @@ setup_zsh() {
     fi
     append_template_to_shell_profile ~/.zshrc
 
+    # Check if PATH modification is already in .zshrc
+    if ! grep -q "$HOME/.local/bin" ~/.zshrc; then
+        echo "export PATH=\$PATH:\$HOME/.local/bin" >> ~/.zshrc
+        log_message "${DEBUG_DETAILS}" "Added \$HOME/.local/bin to PATH in .zshrc"
+    fi
+
     # Reload .zshrc only if running in Zsh
     if [ -n "$ZSH_VERSION" ]; then
         source ~/.zshrc
@@ -50,10 +56,10 @@ setup_bash() {
     # Append template to the appropriate file (prefer .bash_profile if it exists)
     if [ -f ~/.bash_profile ]; then
         append_template_to_shell_profile ~/.bash_profile
-        source ~/.bash_profile
+        . ~/.bash_profile
     elif [ -f ~/.bashrc ]; then
         append_template_to_shell_profile ~/.bashrc
-        source ~/.bashrc
+        . ~/.bashrc
     fi
 }
 

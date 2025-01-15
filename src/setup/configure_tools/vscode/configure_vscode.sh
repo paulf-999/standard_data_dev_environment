@@ -27,9 +27,17 @@ install_extensions() {
 uninstall_extensions() {
     local extensions=("$@")  # Array of extensions
     for extension in "${extensions[@]}"; do
-        code --uninstall-extension "${extension}" &>/dev/null || {
-            print_error_message "Error: Failed to uninstall VSCode extension: ${extension}"
-        }
+        # Try to uninstall the extension and capture any errors
+        if ! code --uninstall-extension "${extension}" &>/dev/null; then
+            # Check if the error is due to the extension not being installed
+            if code --list-extensions | grep -q "${extension}"; then
+                print_error_message "Error: Failed to uninstall VSCode extension: ${extension}. Please check if it's installed correctly."
+            else
+                print_error_message "Warning: VSCode extension ${extension} was not installed, skipping uninstall."
+            fi
+        else
+            echo "Successfully uninstalled VSCode extension: ${extension}"
+        fi
     done
 }
 

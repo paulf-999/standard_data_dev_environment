@@ -82,7 +82,7 @@ install_python_packages() {
 # Set up environment variables
 setup_environment_variables() {
     print_section_header "${DEBUG}" "Step 4: Set up environment variables"
-    bash ${SETUP_SCRIPTS_DIR}/set_up_environment_variables.sh || {
+    bash ${SETUP_SCRIPTS_DIR}/setup_environment_variables.sh || {
         print_error_message "Error: Failed to set up environment variables."
         exit 1
     }
@@ -107,12 +107,12 @@ configure_dev_tools() {
         exit 1
     }
 
-    # # Configure OhMyZsh
-    # log_message "${DEBUG}" "Install ZSH and Oh My Zsh"
-    # bash ${CONFIGURE_TOOLS_DIR}/configure_ohmyzsh.sh || {
-    #     print_error_message "Error: Failed to install ZSH and Oh My Zsh."
-    #     exit 1
-    # }
+    # Configure OhMyZsh
+    log_message "${DEBUG}" "Install ZSH and Oh My Zsh"
+    bash ${CONFIGURE_TOOLS_DIR}/ohmyzsh/configure_ohmyzsh.sh || {
+        print_error_message "Error: Failed to install ZSH and Oh My Zsh."
+        exit 1
+    }
 }
 
 #=======================================================================
@@ -120,13 +120,12 @@ configure_dev_tools() {
 #=======================================================================
 
 # Execute setup steps in sequence
+export_directory_vars  # set up common directory vars
 
-export_directory_vars  # set up common
-
-# install_unix_packages  # 1. Install system dependencies first
+install_unix_packages  # 1. Install system dependencies first
 install_python_and_pip  # 2. Install Python and pip after system setup
 install_python_packages  # 3. Install Python packages next
-# setup_environment_variables  # 4. Set environment variables after core software installation
+setup_environment_variables  # 4. Set environment variables after core software installation
 configure_dev_tools  # 5. Configure SQLFluff after dev tools
 
 log_message "${INFO}" "Environment setup complete." && echo

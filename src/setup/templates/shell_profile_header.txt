@@ -1,7 +1,8 @@
 # Add directories to your PATH variable
 #----------------------------------------
 # Add the filepath where Python packages are installed to the PATH variable
-export PATH=$PATH:$HOME/.local/bin
+export PATH=/usr/local/bin:$PATH
+# export PATH=$PATH:$HOME/.local/bin
 
 #------------------------------------------------------------------------------------
 # WSL-specific env vars
