@@ -4,20 +4,12 @@
 # Variables
 #=======================================================================
 
-# Get the directory of the current script
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-
 # Source shell_utils.sh relative to this script
-source "${SCRIPT_DIR}/../../scripts/sh/shell_utils.sh"
-source "${SCRIPT_DIR}/vscode_extensions_list.sh"
+source "${SHELL_UTILS_PATH}"
+source "${ROOT_SETUP_DIR}/src/setup/configure_tools/vscode/vscode_extensions_list.sh"
 
-# Array of extension categories and their corresponding extensions
-declare -A EXTENSIONS_CATEGORIES=(
-    ["Python"]="EXTENSIONS_PYTHON"
-    ["Data-Tooling"]="EXTENSIONS_DATA_TOOLING"
-    ["Formatting"]="EXTENSIONS_FORMATTING"
-    ["Miscellaneous"]="EXTENSIONS_MISC"
-)
+# Array of extension categories (used as indices for arrays)
+EXTENSIONS_CATEGORIES=("Python" "Data-Tooling" "Formatting" "Miscellaneous")
 
 #=======================================================================
 # Functions
@@ -26,9 +18,7 @@ declare -A EXTENSIONS_CATEGORIES=(
 install_extensions() {
     local extensions=("$@")  # Array of extensions
     for extension in "${extensions[@]}"; do
-        code --install-extension "${extension}" --force &>/dev/null && {
-            log_message "${INFO}" "Installed extension: ${extension}"
-        } || {
+        code --install-extension "${extension}" --force &>/dev/null || {
             print_error_message "Error: Failed to install VSCode extension: ${extension}"
         }
     done
@@ -37,19 +27,44 @@ install_extensions() {
 uninstall_extensions() {
     local extensions=("$@")  # Array of extensions
     for extension in "${extensions[@]}"; do
-        code --uninstall-extension "${extension}" &>/dev/null && {
-            log_message "${INFO}" "Uninstalled extension: ${extension}"
-        } || {
+        code --uninstall-extension "${extension}" &>/dev/null || {
             print_error_message "Error: Failed to uninstall VSCode extension: ${extension}"
         }
     done
 }
 
-# Copy settings.json.template to settings.json
+# Determine the appropriate settings.json file path based on the OS
+get_vscode_settings_path() {
+    # Default settings file for Unix-like systems (Linux/macOS)
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        echo "${HOME}/.config/Code/User/settings.json"
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "${HOME}/Library/Application Support/Code/User/settings.json"
+    # Default settings file for Windows systems
+    elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+        echo "${APPDATA}/Code/User/settings.json"
+    else
+        print_error_message "Unsupported operating system: $OSTYPE"
+        exit 1
+    fi
+}
+
+# Copy settings.json.template to the appropriate settings.json
 configure_vscode_settings_json() {
-    # Define the source and destination for settings.json
-    TEMPLATE_FILE="${SCRIPT_DIR}/settings.json.template"
-    DEST_FILE="${HOME}/.config/Code/User/settings.json"  # Adjust this path if needed
+    # Define the absolute path to the settings.json.template based on the root directory
+    TEMPLATE_FILE="${ROOT_SETUP_DIR}/src/setup/templates/settings.json.template"
+
+    # Debugging: Print the computed template file path to check it
+    # echo "Looking for template file at: $TEMPLATE_FILE"
+
+    # Check if the template file exists before proceeding
+    if [ ! -f "$TEMPLATE_FILE" ]; then
+        print_error_message "Error: settings.json.template not found at $TEMPLATE_FILE."
+        exit 1
+    fi
+
+    # Determine the destination path based on OS
+    DEST_FILE=$(get_vscode_settings_path)
 
     # Copy the template directly to settings.json
     cp "$TEMPLATE_FILE" "$DEST_FILE" || {
@@ -65,19 +80,24 @@ configure_vscode_settings_json() {
 #=======================================================================
 
 # Loop through the categories and install extensions
-for category in "${!EXTENSIONS_CATEGORIES[@]}"; do
-    # Retrieve the array of extensions for the category
-    extensions_array="${EXTENSIONS_CATEGORIES[$category]}"
-    
+for category in "${EXTENSIONS_CATEGORIES[@]}"; do
     # Log the message for each category
-    log_message "${DEBUG}" "Installing ${category} extensions"
-    
-    # Call the install_extensions function with the appropriate array
-    install_extensions "${!extensions_array[@]}"
+    log_message "${DEBUG_DETAILS}" "Installing ${category} extensions"
+
+    # Install the extensions based on the category
+    if [[ "$category" == "Python" ]]; then
+        install_extensions "${EXTENSIONS_PYTHON[@]}"
+    elif [[ "$category" == "Data-Tooling" ]]; then
+        install_extensions "${EXTENSIONS_DATA_TOOLING[@]}"
+    elif [[ "$category" == "Formatting" ]]; then
+        install_extensions "${EXTENSIONS_FORMATTING[@]}"
+    elif [[ "$category" == "Miscellaneous" ]]; then
+        install_extensions "${EXTENSIONS_MISC[@]}"
+    fi
 done
 
-log_message "${DEBUG}" "Uninstalling Python extensions"
+log_message "${DEBUG_DETAILS}" "Uninstalling Python extensions"
 uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}" && echo
 
 # Configure settings.json
-configure_settings_json
+configure_vscode_settings_json

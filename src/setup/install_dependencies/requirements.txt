@@ -1,10 +1,10 @@
 # dbt-Related Libraries
-dbt-core==1.8.3
-dbt-snowflake==1.8.3
+dbt-core==1.9.0
+dbt-snowflake==1.9.0
 
 # SQLFluff libraries
-sqlfluff-templater-dbt==3.2.5  # https://pypi.org/project/sqlfluff-templater-dbt/
-sqlfluff==3.2.5  # https://pypi.org/project/sqlfluff/
+sqlfluff-templater-dbt==3.3.0  # https://pypi.org/project/sqlfluff-templater-dbt/
+sqlfluff==3.3.0 # https://pypi.org/project/sqlfluff/
 
 # Azure libs
 azure.identity==1.13.0
@@ -15,7 +15,6 @@ awscliv2==2.2.0
 boto3==1.26.70  # AWS SDK for Python
 charset-normalizer==2.1.1  # helps with character encoding - used to detect and convert character set encoding
 certifi==2020.12.5  #  collection of Root Certificates for validating SSL certificates
-cryptography==36.0.2  # designed to expose cryptographic recipes and primitives
 idna==2.9  # IDNA refers to Internationalized Domain Names in Applications. This library allows your Python app to work with such domain names
 j2cli==0.3.10  # command-line interface to Jinja2 for templating in shell scripts.
 Jinja2==3.1.3 # command-line interface to Jinja2 for templating in shell scripts.
@@ -28,7 +27,7 @@ requests==2.31.0  # simple HTTP library for Python
 s3transfer==0.6.0  # library for managing Amazon S3 transfers
 s3fs==0.4.2  # a Pythonic file interface to S3. It allows you to work with S3 as if it were a file system
 setuptools==59.6.0  # essential for Python development, Setuptools is a collection of enhancements to the Python distutils for easily building and distributing Python packages
-snowflake-connector-python==3.0.4  # Snowflake Connector for Python
+snowflake-connector-python==3.12.4  # Snowflake Connector for Python
 snowflake-sqlalchemy==1.5.0  # Snowflake SQLAlchemy Dialect
 typing-extensions==4.9.0  # introduces new types for the Python typing system
 urllib3==1.26.19  # HTTP client for Python
@@ -54,7 +53,7 @@ openpyxl==3.1.1  # Python library to read/write Excel 2010 xlsx/xlsm files
 pandas==1.5.3  # Powerful data structures for data analysis, time series, and statistics
 
 # Airflow-Related Libraries
-apache-airflow==2.9.0
+apache-airflow==2.10.0
 gunicorn==20.1.0
 pendulum==2.1.2
 pyarrow==10.0.1

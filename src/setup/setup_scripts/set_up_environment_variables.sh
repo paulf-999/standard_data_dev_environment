@@ -4,17 +4,11 @@
 # Variables
 #=======================================================================
 
-# Get the directory of the current script
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-
 # Source shell_utils.sh relative to this script
-source "${SCRIPT_DIR}/../../scripts/sh/shell_utils.sh"
-
-# Directory for installation dependencies
-INSTALL_DEP_DIR="src/setup/install_dependencies"
+source "${SHELL_UTILS_PATH}"
 
 # Path to the shell profile header template
-SHELL_PROFILE_HEADER_TEMPLATE="src/setup/templates/shell_profile_header.txt"
+SHELL_PROFILE_HEADER_TEMPLATE="${TEMPLATES_DIR}/shell_profile_header.txt"
 
 #=======================================================================
 # Helper Functions

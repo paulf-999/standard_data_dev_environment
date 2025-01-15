@@ -1,14 +1,7 @@
 #!/bin/bash
 
-#=======================================================================
-# Variables
-#=======================================================================
-
-# Get the directory of the current script
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-
 # Source shell_utils.sh relative to this script
-source "${SCRIPT_DIR}/../../scripts/sh/shell_utils.sh"
+source "${SHELL_UTILS_PATH}"
 
 #=======================================================================
 # Functions

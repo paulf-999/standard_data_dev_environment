@@ -40,7 +40,7 @@ clean:
 
 
 abc:
-	bash src/setup/configure_tools/configure_vscode.sh
+	@bash src/setup/configure_tools/vscode/configure_vscode.sh
 
 # Phony targets
 .PHONY: all deps install run test clean

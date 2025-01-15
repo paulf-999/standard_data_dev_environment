@@ -14,20 +14,42 @@
 #=======================================================================
 
 #=======================================================================
-# Variables
-#=======================================================================
-
-# Get the directory where the script is located
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-
-# Source common shell script utilities
-source "${SCRIPT_DIR}/../scripts/sh/shell_utils.sh"
-
-SETUP_SCRIPTS_DIR="src/setup/setup_scripts"
-CONFIGURE_TOOLS_DIR="src/setup/configure_tools"
-#=======================================================================
 # Functions
 #=======================================================================
+
+# Function to export directory paths
+export_directory_vars() {
+    # Compute the root setup directory
+    ROOT_SETUP_DIR=$(cd "$(dirname "$0")/../.."; pwd)
+
+    # Ensure the ROOT_SETUP_DIR is set before proceeding
+    if [[ -z "$ROOT_SETUP_DIR" ]]; then
+        echo "Error: ROOT_SETUP_DIR is empty"
+        exit 1
+    fi
+
+    # Set the other paths using ROOT_SETUP_DIR
+    SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/scripts/sh/shell_utils.sh"
+    INSTALL_DEP_DIR="${ROOT_SETUP_DIR}/src/setup/install_dependencies"
+    SETUP_SCRIPTS_DIR="${ROOT_SETUP_DIR}/src/setup/setup_scripts"
+    CONFIGURE_TOOLS_DIR="${ROOT_SETUP_DIR}/src/setup/configure_tools"
+    TEMPLATES_DIR="${ROOT_SETUP_DIR}/src/setup/templates"
+    source "${SHELL_UTILS_PATH}"
+
+    # Export variables
+    export ROOT_SETUP_DIR
+    export SHELL_UTILS_PATH
+    export INSTALL_DEP_DIR
+    export SETUP_SCRIPTS_DIR
+    export CONFIGURE_TOOLS_DIR
+    export TEMPLATES_DIR
+
+    # Print the exported variables for debugging
+    # echo "ROOT_SETUP_DIR = ${ROOT_SETUP_DIR}"
+    # echo "SHELL_UTILS_PATH = ${SHELL_UTILS_PATH}"
+    # echo "SETUP_SCRIPTS_DIR = ${SETUP_SCRIPTS_DIR}"
+    # echo "INSTALL_DEP_DIR = ${INSTALL_DEP_DIR}"
+}
 
 # Install Unix packages
 install_unix_packages() {
@@ -72,18 +94,18 @@ configure_dev_tools() {
     print_section_header "${DEBUG}" "Step 5: Configure development tools"
 
     # Install VSCode extensions
-    log_message "${DEBUG}" "Step 5: Install VSCode extensions"
+    log_message "${DEBUG}" "1. Install VSCode extensions"
     bash ${CONFIGURE_TOOLS_DIR}/vscode/configure_vscode.sh || {
         print_error_message "Error: Failed to configure Visual Studio Code."
         exit 1
     }
 
     # Configure SQLFluff
-    # log_message "${DEBUG}" "Configure SQLFluff"
-    # j2 templates/.sqlfluff_template.j2 -o ~/.sqlfluff || {
-    #     print_error_message "Error: Failed to configure SQLFluff."
-    #     exit 1
-    # }
+    log_message "${DEBUG}" "2. Configure SQLFluff"
+    j2 ${TEMPLATES_DIR}/.sqlfluff_template.j2 -o ~/.sqlfluff || {
+        print_error_message "Error: Failed to configure SQLFluff."
+        exit 1
+    }
 
     # # Configure OhMyZsh
     # log_message "${DEBUG}" "Install ZSH and Oh My Zsh"
@@ -98,6 +120,8 @@ configure_dev_tools() {
 #=======================================================================
 
 # Execute setup steps in sequence
+
+export_directory_vars  # set up common
 
 # install_unix_packages  # 1. Install system dependencies first
 install_python_and_pip  # 2. Install Python and pip after system setup
