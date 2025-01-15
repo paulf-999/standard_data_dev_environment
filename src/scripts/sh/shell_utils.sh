@@ -34,9 +34,9 @@ log_message() {
 
 print_section_header() {
     local LOG_LEVEL="$1"
-    local MESSAGE_CONTENT="$2"
+    local MESSAGE="$2"
     echo && echo -e "${LOG_LEVEL}#--------------------------------------------------------------------------------------------"
-    echo -e "${LOG_LEVEL}${MESSAGE}${COLOUR_OFF}"
+    echo -e "${LOG_LEVEL}# ${MESSAGE}${COLOUR_OFF}"
     echo -e "${LOG_LEVEL}#--------------------------------------------------------------------------------------------${COLOUR_OFF}"
 }
 

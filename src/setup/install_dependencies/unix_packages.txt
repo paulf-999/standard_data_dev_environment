@@ -1,0 +1,12 @@
+build-essential
+git
+jq
+openjdk-11-jre
+ruby-full
+shellcheck
+unzip
+vim
+wslu
+xclip
+zip
+zsh
