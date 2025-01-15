@@ -73,7 +73,7 @@ configure_dev_tools() {
 
     # Install VSCode extensions
     log_message "${DEBUG}" "Step 5: Install VSCode extensions"
-    bash ${CONFIGURE_TOOLS_DIR}/configure_vscode.sh || {
+    bash ${CONFIGURE_TOOLS_DIR}/vscode/configure_vscode.sh || {
         print_error_message "Error: Failed to configure Visual Studio Code."
         exit 1
     }
