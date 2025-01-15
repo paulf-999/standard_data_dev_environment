@@ -1,6 +1,7 @@
 # Standard Data Dev Environment
 
 This repository contains automation scripts intended to set up and enhance developers' environment.
+
 ---
 
 ## Background
