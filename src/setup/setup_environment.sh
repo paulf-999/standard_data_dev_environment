@@ -94,14 +94,14 @@ configure_dev_tools() {
     print_section_header "${DEBUG}" "Step 5: Configure development tools"
 
     # Install VSCode extensions
-    log_message "${DEBUG}" "1. Install VSCode extensions"
+    log_message "${DEBUG}" "5.1. Install VSCode extensions"
     bash ${CONFIGURE_TOOLS_DIR}/vscode/configure_vscode.sh || {
         print_error_message "Error: Failed to configure Visual Studio Code."
         exit 1
     }
 
     # Configure SQLFluff
-    log_message "${DEBUG}" "2. Configure SQLFluff"
+    log_message "${DEBUG}" "5.2. Configure SQLFluff"
     j2 ${TEMPLATES_DIR}/.sqlfluff_template.j2 -o ~/.sqlfluff || {
         print_error_message "Error: Failed to configure SQLFluff."
         exit 1

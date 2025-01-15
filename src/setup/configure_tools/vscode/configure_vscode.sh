@@ -72,7 +72,7 @@ configure_vscode_settings_json() {
         exit 1
     }
 
-    log_message "${INFO}" "settings.json has been created at $DEST_FILE."
+    log_message "${DEBUG}" "settings.json has been created at $DEST_FILE."
 }
 
 #=======================================================================
@@ -97,7 +97,7 @@ for category in "${EXTENSIONS_CATEGORIES[@]}"; do
 done
 
 log_message "${DEBUG_DETAILS}" "Uninstalling Python extensions"
-uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}" && echo
+uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}"
 
 # Configure settings.json
 configure_vscode_settings_json
