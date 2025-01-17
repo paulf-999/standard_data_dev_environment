@@ -34,15 +34,18 @@ log_message() {
 
 # Function to add Python user binary directory to PATH
 add_python_user_bin_to_path() {
+
+    log_message "${DEBUG_DETAILS}" "Add Python User bin to PATH"
+
     PYTHON_USER_BIN=$(python3 -m site --user-base)/bin
 
     # Debugging output to verify path
-    echo "Python user bin directory: $PYTHON_USER_BIN"
+    log_message "${DEBUG_DETAILS}" "Python user bin directory: $PYTHON_USER_BIN"
     if [[ ! "$PATH" =~ "$PYTHON_USER_BIN" ]]; then
-        echo "Adding Python user binary path to PATH: ${PYTHON_USER_BIN}"
+        log_message "${DEBUG_DETAILS}" "Adding Python user binary path to PATH: ${PYTHON_USER_BIN}"
         export PATH="${PYTHON_USER_BIN}:$PATH"
     else
-        echo "Python user binary path already in PATH: ${PYTHON_USER_BIN}"
+        log_message "${DEBUG_DETAILS}" "Python user binary path already in PATH: ${PYTHON_USER_BIN}"
     fi
 }
 

@@ -67,7 +67,7 @@ install_unix_packages_macos() {
             continue  # Skip the problematic package
         fi
 
-        log_message "${DEBUG_DETAILS}" "Installing package: $package"
+        # log_message "${DEBUG_DETAILS}" "Installing package: $package"
         if ! brew install "$package" > /dev/null 2>&1; then
             log_message "${ERROR}" "Failed to install package: $package via Homebrew."
             exit 1

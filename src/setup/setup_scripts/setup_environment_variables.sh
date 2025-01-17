@@ -7,28 +7,12 @@
 # Source shell_utils.sh relative to this script
 source "${SHELL_UTILS_PATH}"
 
-# Path to the shell profile header template
-SHELL_PROFILE_HEADER_TEMPLATE="${TEMPLATES_DIR}/shell_profile_header.txt"
-
 # The path to add to the PATH variable
 LOCAL_BIN_PATH="$HOME/.local/bin"
 
 #=======================================================================
 # Helper Functions
 #=======================================================================
-
-# Function to append the template to the shell profile (Zsh or Bash)
-append_template_to_shell_profile() {
-    local shell_profile_file="$1"
-    if [ -f "$shell_profile_file" ]; then
-        # Check if the template is already appended
-        if ! grep -q "shell_profile_header" "$shell_profile_file"; then
-            cat "$SHELL_PROFILE_HEADER_TEMPLATE" | cat - "$shell_profile_file" > temp && mv temp "$shell_profile_file"
-        fi
-    else
-        cp "$SHELL_PROFILE_HEADER_TEMPLATE" "$shell_profile_file"
-    fi
-}
 
 # Function to ensure the PATH modification is added to the shell profile
 ensure_path_in_profile() {
@@ -50,7 +34,6 @@ setup_zsh() {
     [ ! -f ~/.zshrc ] && touch ~/.zshrc
 
     # Append template and ensure PATH modification
-    append_template_to_shell_profile ~/.zshrc
     ensure_path_in_profile ~/.zshrc
 
     # Reload .zshrc if running in Zsh
@@ -79,7 +62,6 @@ setup_bash() {
     fi
 
     # Append template and ensure PATH modification
-    append_template_to_shell_profile "$shell_profile_file"
     ensure_path_in_profile "$shell_profile_file"
 
     # Reload shell profile
@@ -88,11 +70,6 @@ setup_bash() {
 
 # Function to set up environment variables
 setup_environment_variables() {
-    # Check if the shell profile header template exists
-    if [ ! -f "$SHELL_PROFILE_HEADER_TEMPLATE" ]; then
-        log_message "${ERROR}" "Template file $SHELL_PROFILE_HEADER_TEMPLATE not found!"
-        exit 1
-    fi
 
     # Determine the current shell and set up accordingly
     if [ -n "$ZSH_VERSION" ]; then
