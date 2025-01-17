@@ -126,8 +126,6 @@ cleanup_zshrc() {
 # Main Cleanup Logic
 #=======================================================================
 
-export_directory_vars
-
 remove_powerlevel10k
 remove_ohmyzsh_plugins
 remove_ohmyzsh

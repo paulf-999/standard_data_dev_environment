@@ -60,14 +60,18 @@ install_ohmyzsh_plugins() {
     local zshrc="${HOME}/.zshrc"
 
     if [[ -f "$zshrc" ]]; then
-        # Add the names of the cloned repositories to the plugin list in .zshrc
-        sed -i.bak -e "/^plugins=(git)/a \\
-        zsh-syntax-highlighting \\
-        zsh-autosuggestions \\
-        zsh-completions \\
-        # command for zsh-completions \\
-        autoload -U compinit && compinit" "$zshrc"
-        log_message "${DEBUG_DETAILS}" "Plugins successfully installed and added plugins to .zshrc!"
+        # Replace the exact 'plugins=(git)' line with the desired multiline block
+        sed -i.bak '/^plugins=(git)$/c\
+plugins=(\
+    git\
+    zsh-syntax-highlighting\
+    zsh-autosuggestions\
+    zsh-completions\
+)\
+# command for zsh-completions\
+autoload -U compinit && compinit' "$zshrc"
+
+        log_message "${DEBUG_DETAILS}" "Plugins successfully installed and added to .zshrc!"
     else
         log_message "${DEBUG_DETAILS}" ".zshrc not found! Unable to update plugins."
     fi
@@ -108,3 +112,6 @@ install_zsh
 install_ohmyzsh
 install_ohmyzsh_plugins
 install_powerlevel10k
+
+log_message "${DEBUG}" "# Step 5: 'source' the .zshrc file'"
+source ~/.zshrc
