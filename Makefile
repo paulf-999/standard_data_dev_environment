@@ -13,7 +13,7 @@ SHELL = /bin/sh
 .EXPORT_ALL_VARIABLES:
 
 # load variables from separate file
-include src/scripts/other/variables.mk # load variables from a separate makefile file
+include src/make/variables.mk # load variables from a separate makefile file
 
 CONFIG_FILE := config.yaml
 

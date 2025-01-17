@@ -23,9 +23,9 @@ export_directory_vars() {
         exit 1
     fi
 
-    SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/scripts/sh/shell_utils.sh"
+    SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/sh/shell_utils.sh"
     INSTALL_DEP_DIR="${ROOT_SETUP_DIR}/src/setup/install_dependencies"
-    SETUP_SCRIPTS_DIR="${ROOT_SETUP_DIR}/src/setup/setup_scripts"
+    SETUP_SCRIPTS_DIR="${ROOT_SETUP_DIR}/src/setup/install_scripts"
     CONFIGURE_TOOLS_DIR="${ROOT_SETUP_DIR}/src/setup/configure_tools"
     TEMPLATES_DIR="${ROOT_SETUP_DIR}/src/setup/templates"
 
@@ -85,17 +85,17 @@ configure_dev_tools() {
         exit 1
     }
 
-    # Configure OhMyZsh
-    log_message "${DEBUG}" "4.2. Install ZSH and Oh My Zsh"
-    bash ${CONFIGURE_TOOLS_DIR}/ohmyzsh/configure_ohmyzsh.sh || {
-        print_error_message "Error: Failed to install ZSH and Oh My Zsh."
+    # Configure SQLFluff using jinja2 template
+    log_message "${DEBUG}" "4.2. Configure SQLFluff"
+    j2 ${TEMPLATES_DIR}/.sqlfluff_template.j2 -o ~/.sqlfluff || {
+        print_error_message "Error: Failed to configure SQLFluff."
         exit 1
     }
 
-    # Configure SQLFluff using jinja2 template
-    log_message "${DEBUG}" "4.3. Configure SQLFluff"
-    j2 ${TEMPLATES_DIR}/.sqlfluff_template.j2 -o ~/.sqlfluff || {
-        print_error_message "Error: Failed to configure SQLFluff."
+    # Configure OhMyZsh
+    log_message "${DEBUG}" "4.3. Install ZSH and Oh My Zsh"
+    bash ${CONFIGURE_TOOLS_DIR}/ohmyzsh/configure_ohmyzsh.sh || {
+        print_error_message "Error: Failed to install ZSH and Oh My Zsh."
         exit 1
     }
 }
