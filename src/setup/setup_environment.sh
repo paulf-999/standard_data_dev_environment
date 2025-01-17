@@ -107,6 +107,8 @@ configure_dev_tools() {
 # Prerequisite: Add Python user binary path to PATH, e.g.: /Users/paulfry/Library/Python/3.9/bin
 # To find this path, run $(python3 -m site --user-base)/bin
 
+# E.g., command to run: export PATH=$PATH:$HOME/Library/Python/3.9/bin
+
 # Execute setup steps in sequence
 export_directory_vars  # Set up common directory vars
 install_unix_packages  # 1. Install system dependencies first

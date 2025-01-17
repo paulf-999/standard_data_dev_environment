@@ -23,6 +23,9 @@ CONFIG_FILE := config.yaml
 all: deps install clean
 
 deps:
+	# Prerequisite: Add Python user binary path to PATH, e.g.: /Users/paulfry/Library/Python/3.9/bin
+	# To find this path, run $(python3 -m site --user-base)/bin
+	# E.g., command to run: export PATH=$PATH:$HOME/Library/Python/3.9/bin
 	@echo "${INFO}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}"
 	@bash src/setup/setup_environment.sh
 
