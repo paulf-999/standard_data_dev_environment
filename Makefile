@@ -37,6 +37,11 @@ test:
 
 clean:
 	@echo "${INFO}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
+	@bash src/setup/configure_tools/ohmyzsh/cleanup_ohmyzsh.sh
+
+ohmyzsh:
+	@echo "${INFO}\nCalled makefile target 'ohmyzsh'. Download and install required libraries and dependencies.${COLOUR_OFF}"
+	@bash src/setup/configure_tools/ohmyzsh/configure_ohmyzsh.sh
 
 # Phony targets
 .PHONY: all deps install run test clean

@@ -1,7 +1,36 @@
 #!/bin/bash
 
-# Source shell_utils.sh relative to this script
+# Compute the root setup directory
+ROOT_SETUP_DIR=$(cd "$(dirname "$0")/../../../../"; pwd)
+echo "ROOT_SETUP_DIR: $ROOT_SETUP_DIR"
+
+# Ensure the ROOT_SETUP_DIR is set before proceeding
+if [[ -z "$ROOT_SETUP_DIR" ]]; then
+    echo "Error: ROOT_SETUP_DIR is empty"
+    exit 1
+fi
+
+# Set the other paths using ROOT_SETUP_DIR
+SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/scripts/sh/shell_utils.sh"
+echo "SHELL_UTILS_PATH: $SHELL_UTILS_PATH"
+
+# Check if shell_utils.sh exists
+if [[ ! -f "$SHELL_UTILS_PATH" ]]; then
+    echo "Error: shell_utils.sh not found at $SHELL_UTILS_PATH"
+    exit 1
+fi
+
+# Source shell_utils.sh
 source "${SHELL_UTILS_PATH}"
+
+# Export variables
+export ROOT_SETUP_DIR SHELL_UTILS_PATH
+
+# Ensure necessary functions are defined
+if ! declare -f log_message >/dev/null; then
+    echo "Error: log_message function not found after sourcing shell_utils.sh"
+    exit 1
+fi
 
 # Detect operating system
 OS_TYPE=$(uname -s)
@@ -96,6 +125,9 @@ cleanup_zshrc() {
 #=======================================================================
 # Main Cleanup Logic
 #=======================================================================
+
+export_directory_vars
+
 remove_powerlevel10k
 remove_ohmyzsh_plugins
 remove_ohmyzsh
