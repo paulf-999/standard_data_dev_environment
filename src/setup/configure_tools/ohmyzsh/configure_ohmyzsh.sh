@@ -104,14 +104,27 @@ install_powerlevel10k() {
     exec zsh -c '. ~/.oh-my-zsh/themes/powerlevel10k/powerlevel10k.zsh-theme'
 }
 
-#=======================================================================
-# Main Script Logic
-#=======================================================================
-check_homebrew
+finalize_zsh_setup() {
+    log_message "${DEBUG}" "# Step 5: Finalise the zsh setup"
+
+    # Ensure the PATH is correctly set in .zshrc
+    echo 'export PATH=/usr/local/bin:$PATH' >> ~/.zshrc
+    echo 'export PATH=/usr/local/bin:$PATH' >> ~/.zshrc
+
+    # Source the .zshrc file to apply the changes
+    if source ~/.zshrc; then
+        log_message "${DEBUG_DETAILS}" ".zshrc has been successfully sourced."
+    else
+        log_message "${DEBUG_DETAILS}" "Error: Failed to source .zshrc."
+    fi
+}
+
+# Install Zsh and setup environment variables
 install_zsh
 install_ohmyzsh
 install_ohmyzsh_plugins
 install_powerlevel10k
+finalize_zsh_setup
 
-log_message "${DEBUG}" "# Step 5: 'source' the .zshrc file'"
-source ~/.zshrc
+# Call the setup_environment_variables script to ensure PATH is updated
+setup_environment_variables
