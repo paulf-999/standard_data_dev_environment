@@ -35,7 +35,7 @@ log_message() {
 # Function to add Python user binary directory to PATH
 add_python_user_bin_to_path() {
 
-    log_message "${DEBUG_DETAILS}" "Add Python User bin to PATH"
+    log_message "${DEBUG}" "Add Python User bin to PATH"
 
     PYTHON_USER_BIN=$(python3 -m site --user-base)/bin
 

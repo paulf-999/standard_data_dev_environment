@@ -11,7 +11,7 @@ if [[ -z "$ROOT_SETUP_DIR" ]]; then
 fi
 
 # Set the other paths using ROOT_SETUP_DIR
-SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/scripts/sh/shell_utils.sh"
+SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/sh/shell_utils.sh"
 # echo "SHELL_UTILS_PATH: $SHELL_UTILS_PATH"
 
 # Check if shell_utils.sh exists
