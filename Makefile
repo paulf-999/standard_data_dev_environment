@@ -38,6 +38,8 @@ test:
 clean:
 	@echo "${INFO}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
 	@bash src/setup/configure_tools/ohmyzsh/cleanup_ohmyzsh.sh
+	@rm -rf ~/.vscode/extensions
+
 
 ohmyzsh:
 	@echo "${INFO}\nCalled makefile target 'ohmyzsh'. Download and install required libraries and dependencies.${COLOUR_OFF}"

@@ -2,7 +2,7 @@
 
 # Compute the root setup directory
 ROOT_SETUP_DIR=$(cd "$(dirname "$0")/../../../../"; pwd)
-echo "ROOT_SETUP_DIR: $ROOT_SETUP_DIR"
+# echo "ROOT_SETUP_DIR: $ROOT_SETUP_DIR"
 
 # Ensure the ROOT_SETUP_DIR is set before proceeding
 if [[ -z "$ROOT_SETUP_DIR" ]]; then
@@ -12,7 +12,7 @@ fi
 
 # Set the other paths using ROOT_SETUP_DIR
 SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/scripts/sh/shell_utils.sh"
-echo "SHELL_UTILS_PATH: $SHELL_UTILS_PATH"
+# echo "SHELL_UTILS_PATH: $SHELL_UTILS_PATH"
 
 # Check if shell_utils.sh exists
 if [[ ! -f "$SHELL_UTILS_PATH" ]]; then
