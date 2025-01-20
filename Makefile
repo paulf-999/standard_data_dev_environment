@@ -41,7 +41,7 @@ test:
 clean:
 	@echo "${INFO}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
 	@bash src/setup/configure_tools/ohmyzsh/cleanup_ohmyzsh.sh
-	@rm -rf ~/.vscode/extensions
+	@sudo rm -rf ~/.vscode/extensions
 
 
 ohmyzsh:

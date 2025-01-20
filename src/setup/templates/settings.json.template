@@ -76,13 +76,13 @@
     // Spell Check Settings
     "cSpell.language": "en-GB", // Use British English for spell checking
     "cSpell.ignoreWords": [
-        "dotenv", "dagrun", "tbls", "pyyaml", "sqlfluff", "jinja", "pylint",
-        "ipynb", "Pylance", "isort", "color", "docstrings", "templater",
-        "Meslo", "dags", "dagbag", "fillna", "colorlog", "colors", "colored"
-    ], // List of custom words to ignore in spell check
+        "color", "colorlog", "colored", "cleanup", "dags", "dagbag", "dagrun", "docstrings",
+        "dotenv", "fillna", "jinja", "isort", "ipynb", "ohmyzsh", "paulfry", "Pylance", "pyyaml",
+        "pylint", "sqlfluff", "tbls", "templater"
+    ]
+    , // List of custom words to ignore in spell check
     "cSpell.enabledFileTypes": {
         "json": true,
-        "markdown": true,
         "plaintext": true,
         "python": true,
         "text": true,
