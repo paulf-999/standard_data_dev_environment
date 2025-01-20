@@ -47,7 +47,7 @@ clean:
 
 ohmyzsh:
 	@echo "${INFO}\nCalled makefile target 'ohmyzsh'. Download and install 'ohmyzsh'.${COLOUR_OFF}"
-	@bash src/sh/setup_scripts/ohmyzsh/configure_ohmyzsh.sh
+	@bash src/sh/setup_scripts/ohmyzsh/install_ohmyzsh.sh
 
 # Phony targets
 .PHONY: all deps install run test clean
