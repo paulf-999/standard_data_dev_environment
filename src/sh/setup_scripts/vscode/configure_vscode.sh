@@ -6,7 +6,7 @@
 
 # Source shell_utils.sh relative to this script
 source "${SHELL_UTILS_PATH}"
-source "${ROOT_DIR}/src/setup/configure_tools/vscode/vscode_extensions_list.sh"
+source "${SETUP_SCRIPTS_DIR}/vscode/vscode_extensions_list.sh"
 
 # Array of extension categories (used as indices for arrays)
 EXTENSIONS_CATEGORIES=("Python" "Data-Tooling" "Formatting" "Miscellaneous")
@@ -56,7 +56,7 @@ get_vscode_settings_path() {
 # Copy settings.json.template to the appropriate settings.json
 configure_vscode_settings_json() {
     # Define the absolute path to the settings.json.template based on the root directory
-    TEMPLATE_FILE="${ROOT_DIR}/src/setup/templates/settings.json.template"
+    TEMPLATE_FILE="${TEMPLATES_DIR}/settings.json.template"
 
     # Debugging: Print the computed template file path to check it
     # echo "Looking for template file at: $TEMPLATE_FILE"
