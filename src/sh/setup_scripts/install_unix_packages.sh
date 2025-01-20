@@ -16,6 +16,8 @@ source "${SHELL_UTILS_PATH}"
 # List of packages to skip on macOS
 MAC_OS_SKIP_PACKAGES=("build-essential" "openjdk-11-jre" "ruby-full" "wslu")
 
+UNIX_PACKAGES_TXT_PATH="${IP_CONFIG_DIR}/tools/unix_packages.txt"
+
 #=======================================================================
 # Helper Functions
 #=======================================================================
@@ -31,8 +33,8 @@ update_unix_packages() {
 
 # Function to install Unix packages
 install_unix_packages_linux() {
-    log_message "${DEBUG_DETAILS}" "Installing Unix packages..."
-    sudo apt -yqq install "$(cat ${INSTALL_DEP_DIR}/unix_packages.txt)" || {
+    # log_message "${DEBUG_DETAILS}" "Installing Unix packages..."
+    sudo apt -yqq install "$(cat ${UNIX_PACKAGES_TXT_PATH})" || {
         log_message "${ERROR}" "Failed to install Unix packages via apt."
         exit 1
     }
@@ -40,7 +42,7 @@ install_unix_packages_linux() {
 
 # Function to install development tools for macOS
 install_dev_tools_macos() {
-    log_message "${DEBUG_DETAILS}" "Installing development tools on macOS..."
+    # log_message "${DEBUG_DETAILS}" "Installing development tools on macOS..."
     brew install gcc make > /dev/null 2>&1 || {
         log_message "${ERROR}" "Failed to install macOS development tools."
         exit 1
@@ -49,7 +51,7 @@ install_dev_tools_macos() {
 
 # Function to install packages on macOS using Homebrew
 install_unix_packages_macos() {
-    log_message "${DEBUG_DETAILS}" "Installing Unix-like packages on macOS..."
+    # log_message "${DEBUG_DETAILS}" "Installing Unix-like packages on macOS..."
 
     # Install other packages listed in the unix_packages.txt (excluding those in MAC_OS_SKIP_PACKAGES)
     while read -r package; do
@@ -63,7 +65,7 @@ install_unix_packages_macos() {
         done
 
         if [[ "$package_found" == true ]]; then
-            log_message "${DEBUG}" "Skipping installation of $package."
+            # log_message "${DEBUG}" "Skipping installation of $package."
             continue  # Skip the problematic package
         fi
 
@@ -72,7 +74,7 @@ install_unix_packages_macos() {
             log_message "${ERROR}" "Failed to install package: $package via Homebrew."
             exit 1
         fi
-    done < ${INSTALL_DEP_DIR}/unix_packages.txt
+    done < ${UNIX_PACKAGES_TXT_PATH}
 }
 
 # Function to install Unix packages (Master function)

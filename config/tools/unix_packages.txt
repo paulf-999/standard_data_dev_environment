@@ -4,6 +4,7 @@ jq
 openjdk-11-jre
 ruby-full
 shellcheck
+tree
 unzip
 vim
 wslu

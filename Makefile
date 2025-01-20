@@ -27,10 +27,12 @@ deps:
 	# To find this path, run $(python3 -m site --user-base)/bin
 	# E.g., command to run: export PATH=$PATH:$HOME/Library/Python/3.9/bin
 	@echo "${INFO}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}"
-	@bash src/setup/setup_environment.sh
+	@bash src/sh/setup_scripts/ohmyzsh/install_ohmyzsh.sh
+	@bash src/sh/setup_scripts/setup_environment_variables.sh
 
 install:
-	@echo "${INFO}\nCalled makefile target 'install'. Run the setup & install targets.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'install'.${COLOUR_OFF}"
+	@bash src/sh/setup_environment.sh
 
 run:
 	@echo "${INFO}\nCalled makefile target 'run'. Launch service.${COLOUR_OFF}"
@@ -40,13 +42,12 @@ test:
 
 clean:
 	@echo "${INFO}\nCalled makefile target 'clean'. Restoring the repository to its initial state.${COLOUR_OFF}"
-	@bash src/setup/configure_tools/ohmyzsh/cleanup_ohmyzsh.sh
-	@rm -rf ~/.vscode/extensions
-
+	@bash src/sh/setup_scripts/ohmyzsh/cleanup_ohmyzsh.sh
+	@sudo rm -rf ~/.vscode/extensions
 
 ohmyzsh:
-	@echo "${INFO}\nCalled makefile target 'ohmyzsh'. Download and install required libraries and dependencies.${COLOUR_OFF}"
-	@bash src/setup/configure_tools/ohmyzsh/configure_ohmyzsh.sh
+	@echo "${INFO}\nCalled makefile target 'ohmyzsh'. Download and install 'ohmyzsh'.${COLOUR_OFF}"
+	@bash src/sh/setup_scripts/ohmyzsh/install_ohmyzsh.sh
 
 # Phony targets
 .PHONY: all deps install run test clean

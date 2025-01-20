@@ -1,0 +1,93 @@
+{
+    // General Editor Settings
+    "workbench.colorTheme": "Default Dark+", // Set your preferred theme
+    "workbench.iconTheme": "material-icon-theme", // Material Icon Theme
+    "workbench.startupEditor": "newUntitledFile", // Start with a blank file
+
+    // Editor Settings
+    "editor.fontSize": 14, // Set font size
+    "editor.tabSize": 4, // Use 4 spaces for indentation
+    "editor.rulers": [80, 120], // Show rulers at 80 and 120 characters for line length
+    "editor.autoIndent": "full", // Auto-indent code
+    "editor.wordWrap": "on", // Enable word wrap for readability
+    "editor.fontLigatures": true, // Enable font ligatures (if supported by font)
+    "editor.insertSpaces": true, // Use spaces instead of tabs
+    "editor.renderWhitespace": "all", // Display all whitespace characters
+    "editor.minimap.enabled": false, // Disable minimap for better focus
+    "editor.multiCursorModifier": "ctrlCmd", // Use Ctrl/Cmd for multi-cursor selection
+    "editor.suggest.showMethods": true, // Show method suggestions in IntelliSense
+    "editor.suggest.preview": true, // Preview suggestions before accepting
+    "editor.acceptSuggestionOnEnter": "on", // Accept suggestions with Enter key
+    "editor.snippetSuggestions": "top", // Show code snippets at the top of suggestions
+    "diffEditor.ignoreTrimWhitespace": true, // Ignore trailing whitespace in diffs
+
+    // File Handling
+    "files.trimTrailingWhitespace": true, // Trim trailing whitespace
+    "files.insertFinalNewline": true, // Ensure a newline at the end of files
+    "files.autoSave": "afterDelay", // Auto-save files after a short delay
+    "files.autoSaveDelay": 1000, // 1-second delay before auto-save triggers
+    "files.exclude": {
+        "**/.git": true, // Exclude git directories from file explorer
+        "**/.DS_Store": true, // Exclude macOS system files
+        "**/node_modules": true // Exclude node_modules directories
+    },
+
+    // Python-Specific Settings
+    "python.defaultInterpreterPath": "/usr/local/bin/python3", // Path to Python interpreter
+
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff", // Set Ruff as the default formatter for Python
+        "editor.formatOnSave": true, // Automatically format code on save
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "never", // Disable auto-fix for all issues
+            "source.organizeImports": "explicit" // Organize imports explicitly on save
+        }
+    },
+
+    // Ruff Linting and Formatting
+    "ruff.lineLength": 120, // Set line length limit for Ruff
+
+    // Terminal Settings
+    "terminal.integrated.defaultProfile.windows": "Command Prompt", // Default terminal profile on Windows
+    "terminal.integrated.defaultProfile.linux": "bash", // Default terminal profile on Linux
+    "terminal.integrated.defaultProfile.osx": "zsh", // Default terminal profile on macOS
+    "terminal.integrated.fontFamily": "MesloLGS NF", // Use a Nerd Font for enhanced terminal icons
+    "terminal.integrated.env.osx": {
+        "PATH": "...:/usr/bin:/bin:..." // Set custom PATH for terminal on macOS
+    },
+
+    // Extensions Settings
+    "extensions.ignoreRecommendations": false, // Show extension recommendations
+
+    /*
+    * #################################
+    * App/extension-specific settings
+    * #################################
+    */
+
+
+    // markdownlint Settings
+    "markdownlint.config": {
+        "MD033": false, // Allow inline HTML in Markdown
+        "MD037": false  // Disable emphasis style consistency check
+    },
+    "markdownlint.run": "onSave", // Run MarkdownLint on file save
+
+    // Spell Check Settings
+    "cSpell.language": "en-GB", // Use British English for spell checking
+    "cSpell.ignoreWords": [
+        "color", "colorlog", "colored", "cleanup", "dags", "dagbag", "dagrun", "docstrings",
+        "dotenv", "fillna", "jinja", "isort", "ipynb", "ohmyzsh", "paulfry", "Pylance", "pyyaml",
+        "pylint", "sqlfluff", "tbls", "templater"
+    ]
+    , // List of custom words to ignore in spell check
+    "cSpell.enabledFileTypes": {
+        "json": true,
+        "plaintext": true,
+        "python": true,
+        "text": true,
+        "yaml": true,
+        "yml": true
+    }, // List of languages to enable spell check
+
+}

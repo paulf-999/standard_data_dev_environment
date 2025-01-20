@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # Source shell_utils.sh relative to this script
-source "${SHELL_UTILS_PATH}"
-
-# Source set_up_environment_variables.sh
-source "${SETUP_SCRIPTS_DIR}/setup_environment_variables.sh"
+source src/sh/shell_utils.sh
 
 # Detect operating system
 OS_TYPE=$(uname -s)
