@@ -1,9 +1,10 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+
 
 EXTENSIONS_PYTHON=(
     "demystifying-javascript.python-extensions-pack"  # Python Extension Pack
     "charliermarsh.ruff"  # Ruff for linting and formatting
-    "ms-python.isort"  # isort for sorting imports
 )
 
 EXTENSIONS_DATA_TOOLING=(
