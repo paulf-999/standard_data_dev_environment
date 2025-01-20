@@ -1,6 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2034
-
+# cSpell:disable
 
 EXTENSIONS_PYTHON=(
     "demystifying-javascript.python-extensions-pack"  # Python Extension Pack
