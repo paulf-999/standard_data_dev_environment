@@ -1,5 +1,3 @@
-// cSpell:ignore charliermarsh, MesloLGS
-
 {
     // General Editor Settings
     "workbench.colorTheme": "Default Dark+", // Set your preferred theme
@@ -26,8 +24,8 @@
     // File Handling
     "files.trimTrailingWhitespace": true, // Trim trailing whitespace
     "files.insertFinalNewline": true, // Ensure a newline at the end of files
-    "files.autoSave": "afterDelay", // Auto-save files after a short delay
-    "files.autoSaveDelay": 1000, // 1-second delay before auto-save triggers
+    // "files.autoSave": "afterDelay", // Auto-save files after a short delay
+    // "files.autoSaveDelay": 1000, // 1-second delay before auto-save triggers
     "files.exclude": {
         "**/.git": true, // Exclude git directories from file explorer
         "**/.DS_Store": true, // Exclude macOS system files
@@ -90,6 +88,7 @@
         "text": true,
         "yaml": true,
         "yml": true
-    }, // List of languages to enable spell check
+    },
+    "workbench.colorCustomizations": {}, // List of languages to enable spell check
 
 }
