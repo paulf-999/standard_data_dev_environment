@@ -32,7 +32,7 @@ update_unix_packages() {
 # Function to install Unix packages
 install_unix_packages_linux() {
     log_message "${DEBUG_DETAILS}" "Installing Unix packages..."
-    sudo apt -yqq install "$(cat ${INSTALL_DEP_DIR}/unix_packages.txt)" || {
+    sudo apt -yqq install "$(cat ${IP_CONFIG_DIR}/tools/unix_packages.txt)" || {
         log_message "${ERROR}" "Failed to install Unix packages via apt."
         exit 1
     }

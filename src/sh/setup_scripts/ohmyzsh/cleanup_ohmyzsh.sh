@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Compute the root setup directory
-ROOT_SETUP_DIR=$(cd "$(dirname "$0")/../../../../"; pwd)
-# echo "ROOT_SETUP_DIR: $ROOT_SETUP_DIR"
+ROOT_DIR=$(cd "$(dirname "$0")/../../../../"; pwd)
+# echo "ROOT_DIR: $ROOT_DIR"
 
-# Ensure the ROOT_SETUP_DIR is set before proceeding
-if [[ -z "$ROOT_SETUP_DIR" ]]; then
-    echo "Error: ROOT_SETUP_DIR is empty"
+# Ensure the ROOT_DIR is set before proceeding
+if [[ -z "$ROOT_DIR" ]]; then
+    echo "Error: ROOT_DIR is empty"
     exit 1
 fi
 
-# Set the other paths using ROOT_SETUP_DIR
-SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/sh/shell_utils.sh"
+# Set the other paths using ROOT_DIR
+SHELL_UTILS_PATH="${ROOT_DIR}/src/sh/shell_utils.sh"
 # echo "SHELL_UTILS_PATH: $SHELL_UTILS_PATH"
 
 # Check if shell_utils.sh exists
@@ -24,7 +24,7 @@ fi
 source "${SHELL_UTILS_PATH}"
 
 # Export variables
-export ROOT_SETUP_DIR SHELL_UTILS_PATH
+export ROOT_DIR SHELL_UTILS_PATH
 
 # Ensure necessary functions are defined
 if ! declare -f log_message >/dev/null; then

@@ -16,20 +16,19 @@
 
 # Function to export directory paths
 export_directory_vars() {
-    ROOT_SETUP_DIR=$(cd "$(dirname "$0")/../.."; pwd)
+    ROOT_DIR=$(cd "$(dirname "$0")/../.."; pwd)
 
-    if [[ -z "$ROOT_SETUP_DIR" || ! -d "$ROOT_SETUP_DIR" ]]; then
-        echo "Error: ROOT_SETUP_DIR is invalid or does not exist."
+    if [[ -z "$ROOT_DIR" || ! -d "$ROOT_DIR" ]]; then
+        echo "Error: ROOT_DIR is invalid or does not exist."
         exit 1
     fi
 
-    SHELL_UTILS_PATH="${ROOT_SETUP_DIR}/src/sh/shell_utils.sh"
-    INSTALL_DEP_DIR="${ROOT_SETUP_DIR}/src/setup/install_dependencies"
-    SETUP_SCRIPTS_DIR="${ROOT_SETUP_DIR}/src/setup/install_scripts"
-    CONFIGURE_TOOLS_DIR="${ROOT_SETUP_DIR}/src/setup/configure_tools"
-    TEMPLATES_DIR="${ROOT_SETUP_DIR}/src/setup/templates"
+    IP_CONFIG_DIR="${ROOT_DIR}/config"
+    TEMPLATES_DIR="${IP_CONFIG_DIR}/templates"
+    SETUP_SCRIPTS_DIR="${ROOT_DIR}/src/sh/setup_scripts"
+    SHELL_UTILS_PATH="${ROOT_DIR}/src/sh/shell_utils.sh"
 
-    for dir in "$SHELL_UTILS_PATH" "$INSTALL_DEP_DIR" "$SETUP_SCRIPTS_DIR" "$CONFIGURE_TOOLS_DIR" "$TEMPLATES_DIR"; do
+    for dir in "$IP_CONFIG_DIR" "$SHELL_UTILS_PATH" "$TEMPLATES_DIR"; do
         if [[ ! -e "$dir" ]]; then
             echo "Error: Directory or file ${dir} does not exist."
             exit 1
@@ -37,10 +36,10 @@ export_directory_vars() {
     done
 
     source "${SHELL_UTILS_PATH}"
-    export ROOT_SETUP_DIR SHELL_UTILS_PATH INSTALL_DEP_DIR SETUP_SCRIPTS_DIR CONFIGURE_TOOLS_DIR TEMPLATES_DIR
+    export ROOT_DIR SHELL_UTILS_PATH TEMPLATES_DIR
 
     # Source set_up_environment_variables.sh
-    source "${SETUP_SCRIPTS_DIR}/setup_environment_variables.sh"
+    source "${ROOT_DIR}/src/sh//setup_environment_variables.sh"
 }
 
 # Install Unix packages
@@ -66,7 +65,7 @@ install_python_packages() {
     print_section_header "${DEBUG}" "Step 3: Install Python packages"
 
     # Install Python packages from requirements.txt
-    pip3 install --disable-pip-version-check -r "${INSTALL_DEP_DIR}/requirements.txt" -q || {
+    pip3 install --disable-pip-version-check -r "${ROOT_DIR}/requirements.txt" -q || {
         print_error_message "Error: Failed to install Python packages."
         exit 1
     }
@@ -80,7 +79,7 @@ configure_dev_tools() {
 
     # Install VSCode extensions
     log_message "${DEBUG}" "4.1. Install VSCode extensions"
-    bash ${CONFIGURE_TOOLS_DIR}/vscode/configure_vscode.sh || {
+    bash ${SETUP_SCRIPTS_DIR}/vscode/configure_vscode.sh || {
         print_error_message "Error: Failed to configure Visual Studio Code."
         exit 1
     }
@@ -94,7 +93,7 @@ configure_dev_tools() {
 
     # Configure OhMyZsh
     log_message "${DEBUG}" "4.3. Install ZSH and Oh My Zsh"
-    bash ${CONFIGURE_TOOLS_DIR}/ohmyzsh/configure_ohmyzsh.sh || {
+    bash ${SETUP_SCRIPTS_DIR}/ohmyzsh/configure_ohmyzsh.sh || {
         print_error_message "Error: Failed to install ZSH and Oh My Zsh."
         exit 1
     }

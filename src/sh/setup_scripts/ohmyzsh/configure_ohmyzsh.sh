@@ -4,7 +4,7 @@
 source "${SHELL_UTILS_PATH}"
 
 # Source set_up_environment_variables.sh
-source "${SETUP_SCRIPTS_DIR}/setup_environment_variables.sh"
+source "${INSTALL_SCRIPTS_DIR}/setup_environment_variables.sh"
 
 # Detect operating system
 OS_TYPE=$(uname -s)
