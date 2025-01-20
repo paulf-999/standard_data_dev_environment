@@ -1,43 +1,93 @@
 {
-  "workbench.iconTheme": "material-icon-theme",
-  "editor.lineHeight": 22,
-  "editor.fontLigatures": true,
-  "editor.tabSize": 4,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  "editor.wordWrap": "on",
-  "editor.minimap.enabled": false,
-  "editor.acceptSuggestionOnEnter": "on",
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "editor.formatOnType": true,
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.snippetSuggestions": "top",
-  "editor.suggest.preview": true,
-  "editor.suggest.showMethods": true,
-  "editor.cursorBlinking": "smooth",
-  "editor.cursorSmoothCaretAnimation": true,
-  "editor.rulers": [80, 120],
-  "editor.autoIndent": "full",
-  "diffEditor.ignoreTrimWhitespace": true,
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "files.associations": {
-    "*.sql": "jinja-sql"
-  },
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true
-  },
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "88"],
-  "python.linting.enabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": ["--max-line-length=88"],
-  "python.linting.pylintEnabled": false,
-  "python.sortImports.args": ["--profile", "black"],
-  "python.defaultInterpreterPath": "/usr/local/bin/python3"
+    // General Editor Settings
+    "workbench.colorTheme": "Default Dark+", // Set your preferred theme
+    "workbench.iconTheme": "material-icon-theme", // Material Icon Theme
+    "workbench.startupEditor": "newUntitledFile", // Start with a blank file
+
+    // Editor Settings
+    "editor.fontSize": 14, // Set font size
+    "editor.tabSize": 4, // Use 4 spaces for indentation
+    "editor.rulers": [80, 120], // Show rulers at 80 and 120 characters for line length
+    "editor.autoIndent": "full", // Auto-indent code
+    "editor.wordWrap": "on", // Enable word wrap for readability
+    "editor.fontLigatures": true, // Enable font ligatures (if supported by font)
+    "editor.insertSpaces": true, // Use spaces instead of tabs
+    "editor.renderWhitespace": "all", // Display all whitespace characters
+    "editor.minimap.enabled": false, // Disable minimap for better focus
+    "editor.multiCursorModifier": "ctrlCmd", // Use Ctrl/Cmd for multi-cursor selection
+    "editor.suggest.showMethods": true, // Show method suggestions in IntelliSense
+    "editor.suggest.preview": true, // Preview suggestions before accepting
+    "editor.acceptSuggestionOnEnter": "on", // Accept suggestions with Enter key
+    "editor.snippetSuggestions": "top", // Show code snippets at the top of suggestions
+    "diffEditor.ignoreTrimWhitespace": true, // Ignore trailing whitespace in diffs
+
+    // File Handling
+    "files.trimTrailingWhitespace": true, // Trim trailing whitespace
+    "files.insertFinalNewline": true, // Ensure a newline at the end of files
+    "files.autoSave": "afterDelay", // Auto-save files after a short delay
+    "files.autoSaveDelay": 1000, // 1-second delay before auto-save triggers
+    "files.exclude": {
+        "**/.git": true, // Exclude git directories from file explorer
+        "**/.DS_Store": true, // Exclude macOS system files
+        "**/node_modules": true // Exclude node_modules directories
+    },
+
+    // Python-Specific Settings
+    "python.defaultInterpreterPath": "/usr/local/bin/python3", // Path to Python interpreter
+
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff", // Set Ruff as the default formatter for Python
+        "editor.formatOnSave": true, // Automatically format code on save
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "never", // Disable auto-fix for all issues
+            "source.organizeImports": "explicit" // Organize imports explicitly on save
+        }
+    },
+
+    // Ruff Linting and Formatting
+    "ruff.lineLength": 120, // Set line length limit for Ruff
+
+    // Terminal Settings
+    "terminal.integrated.defaultProfile.windows": "Command Prompt", // Default terminal profile on Windows
+    "terminal.integrated.defaultProfile.linux": "bash", // Default terminal profile on Linux
+    "terminal.integrated.defaultProfile.osx": "zsh", // Default terminal profile on macOS
+    "terminal.integrated.fontFamily": "MesloLGS NF", // Use a Nerd Font for enhanced terminal icons
+    "terminal.integrated.env.osx": {
+        "PATH": "...:/usr/bin:/bin:..." // Set custom PATH for terminal on macOS
+    },
+
+    // Extensions Settings
+    "extensions.ignoreRecommendations": false, // Show extension recommendations
+
+    /*
+    * #################################
+    * App/extension-specific settings
+    * #################################
+    */
+
+
+    // markdownlint Settings
+    "markdownlint.config": {
+        "MD033": false, // Allow inline HTML in Markdown
+        "MD037": false  // Disable emphasis style consistency check
+    },
+    "markdownlint.run": "onSave", // Run MarkdownLint on file save
+
+    // Spell Check Settings
+    "cSpell.language": "en-GB", // Use British English for spell checking
+    "cSpell.ignoreWords": [
+        "dotenv", "dagrun", "tbls", "pyyaml", "sqlfluff", "jinja", "pylint",
+        "ipynb", "Pylance", "isort", "color", "docstrings", "templater",
+        "Meslo", "dags", "dagbag", "fillna", "colorlog", "colors", "colored"
+    ], // List of custom words to ignore in spell check
+    "cSpell.enabledFileTypes": {
+        "json": true,
+        "markdown": true,
+        "plaintext": true,
+        "python": true,
+        "text": true,
+        "yaml": true,
+        "yml": true
+    }, // List of languages to enable spell check
+
 }

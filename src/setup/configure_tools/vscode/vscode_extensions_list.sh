@@ -2,16 +2,15 @@
 
 EXTENSIONS_PYTHON=(
     "demystifying-javascript.python-extensions-pack"  # Python Extension Pack
-    "ms-python.black-formatter"
-    "ms-python.flake8"
-    "ms-python.isort"
+    "charliermarsh.ruff"  # Ruff for linting and formatting
+    "ms-python.isort"  # isort for sorting imports
 )
 
 EXTENSIONS_DATA_TOOLING=(
     "hashicorp.terraform"
     "innoverio.vscode-dbt-power-user"
     "dorzey.vscode-sqlfluff"
-    # Docker extns
+    # Docker extensions
     "ms-azuretools.vscode-docker"
     "ms-vscode-remote.remote-containers"
     "ms-toolsai.datawrangler"
