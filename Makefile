@@ -15,8 +15,6 @@ SHELL = /bin/sh
 # load variables from separate file
 include src/make/variables.mk # load variables from a separate makefile file
 
-CONFIG_FILE := config.yaml
-
 #=======================================================================
 # Targets
 #=======================================================================
