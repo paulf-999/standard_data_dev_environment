@@ -32,7 +32,14 @@ deps:
 
 install:
 	@echo "${INFO}\nCalled makefile target 'install'.${COLOUR_OFF}"
-	@bash src/sh/setup_environment.sh
+	@echo "${DEBUG}\nStep 1: Install Unix packages'.${COLOUR_OFF}"
+	@bash src/sh/setup_scripts/install_unix_packages.sh
+	@echo "${DEBUG}\nStep 2: Install Python and pip.${COLOUR_OFF}"
+	@bash src/sh/setup_scripts/install_python_and_pip.sh
+	@echo "${DEBUG}\nStep 3: Install Python packages.${COLOUR_OFF}"
+	@bash src/sh/setup_scripts/install_python_packages.sh
+	@echo "${DEBUG}\nStep 4: Configure development tools.${COLOUR_OFF}"
+	@bash src/sh/setup_scripts/configure_dev_tools.sh
 
 run:
 	@echo "${INFO}\nCalled makefile target 'run'. Launch service.${COLOUR_OFF}"
