@@ -25,9 +25,9 @@ all: deps install clean
 
 # To find this the value for the PATH variable, run $(python3 -m site --user-base)/bin
 deps:
-	# Prerequisite: Add Python user binary path to PATH, e.g.: /Users/paulfry/Library/Python/3.9/bin
-	# E.g., command to run: export PATH=$PATH:$HOME/Library/Python/3.9/bin
-	@echo "${INFO}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}"
+	@echo "${INFO}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}\n"
+	@echo "${DEBUG_DETAILS} - Prerequisite: Add Python user binary path to PATH, e.g.: /Users/paulfry/Library/Python/3.9/bin"
+	@echo "${DEBUG_DETAILS} - E.g., command to run: export PATH=\$$PATH:\$$HOME/Library/Python/3.9/bin"
 	@bash src/sh/setup_scripts/ohmyzsh/install_ohmyzsh.sh
 	@bash src/sh/setup_scripts/setup_environment_variables.sh
 

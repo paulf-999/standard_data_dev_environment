@@ -17,13 +17,13 @@ check_homebrew() {
 }
 
 install_zsh() {
-    log_message "${DEBUG}" "# Step 1: Install zsh"
+    # log_message "${DEBUG}" "# i: Install zsh"
     if [[ "${OS_TYPE}" == "Darwin" ]]; then
         if ! command -v zsh &>/dev/null; then
             log_message "${DEBUG_DETAILS}" "Installing zsh using Homebrew..."
             brew install zsh
-        else
-            log_message "${DEBUG_DETAILS}" "zsh is already installed."
+        # else
+        #    log_message "${DEBUG_DETAILS}" "zsh is already installed."
         fi
     elif [[ "${OS_TYPE}" == "Linux" ]]; then
         sudo apt install -yqq zsh zsh-common zsh-doc
@@ -34,7 +34,7 @@ install_zsh() {
 }
 
 install_ohmyzsh() {
-    log_message "${DEBUG}" "# Step 2: Install 'Oh My Zsh'"
+    # log_message "${DEBUG}" "# ii: Install 'Oh My Zsh'"
     if [[ -d "$HOME/.oh-my-zsh" ]]; then
         log_message "${DEBUG_DETAILS}" "'Oh My Zsh' is already installed."
     else
@@ -44,12 +44,24 @@ install_ohmyzsh() {
 }
 
 install_ohmyzsh_plugins() {
-    log_message "${DEBUG}" "# Step 3: Install the 'Oh My Zsh' plugins"
+    # log_message "${DEBUG}" "# iii: Install the 'Oh My Zsh' plugins"
 
-    # Clone the plugins into the appropriate directory
-    git clone -q https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone -q https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
-    git clone -q https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    local ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
+
+    # zsh-syntax-highlighting
+    if [[ ! -d "${ZSH_CUSTOM_DIR}/zsh-syntax-highlighting" ]]; then
+        git clone -q https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM_DIR}/zsh-syntax-highlighting"
+    fi
+
+    # zsh-completions
+    if [[ ! -d "${ZSH_CUSTOM_DIR}/zsh-completions" ]]; then
+        git clone -q https://github.com/zsh-users/zsh-completions.git "${ZSH_CUSTOM_DIR}/zsh-completions"
+    fi
+
+    # zsh-autosuggestions
+    if [[ ! -d "${ZSH_CUSTOM_DIR}/zsh-autosuggestions" ]]; then
+        git clone -q https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM_DIR}/zsh-autosuggestions"
+    fi
 
     wait
 
@@ -57,7 +69,6 @@ install_ohmyzsh_plugins() {
     local zshrc="${HOME}/.zshrc"
 
     if [[ -f "$zshrc" ]]; then
-        # Replace the exact 'plugins=(git)' line with the desired multiline block
         sed -i.bak '/^plugins=(git)$/c\
 plugins=(\
     git\
@@ -68,19 +79,19 @@ plugins=(\
 # command for zsh-completions\
 autoload -U compinit && compinit' "$zshrc"
 
-        log_message "${DEBUG_DETAILS}" "Plugins successfully installed and added to .zshrc!"
+        # log_message "${DEBUG_DETAILS}" "Plugins successfully installed and added to .zshrc!"
     else
         log_message "${DEBUG_DETAILS}" ".zshrc not found! Unable to update plugins."
     fi
 }
 
 install_powerlevel10k() {
-    log_message "${DEBUG}" "# Step 4: Install Powerlevel10k theme"
+    # log_message "${DEBUG}" "# iv: Install Powerlevel10k theme"
     local theme_dir="$HOME/.oh-my-zsh/themes/powerlevel10k"
     local zshrc="${HOME}/.zshrc"
 
     if [[ -d "$theme_dir" ]]; then
-        log_message "${DEBUG_DETAILS}" "Powerlevel10k is already installed."
+        log_message "${DEBUG_DETAILS}" "ZSH Theme 'Powerlevel10k' is already installed."
     else
         git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git "$theme_dir" || log_message "${DEBUG_DETAILS}" "Failed to clone Powerlevel10k theme. Please check your internet connection."
     fi
@@ -101,12 +112,12 @@ install_powerlevel10k() {
     exec zsh -c '. ~/.oh-my-zsh/themes/powerlevel10k/powerlevel10k.zsh-theme'
 }
 
-finalize_zsh_setup() {
-    log_message "${DEBUG}" "# Step 5: Finalise the zsh setup"
+finalise_zsh_setup() {
+    # log_message "${DEBUG}" "# v: Finalise the zsh setup"
 
     # Ensure the PATH is correctly set in .zshrc
-    echo 'export PATH=/usr/local/bin:$PATH' >> ~/.zshrc
-    echo 'export PATH=/usr/local/bin:$PATH' >> ~/.zshrc
+    echo "export PATH=/usr/local/bin:$PATH" >> ~/.zshrc
+    echo "export PATH=/usr/local/bin:$PATH" >> ~/.zshrc
 
     # Source the .zshrc file to apply the changes
     if source ~/.zshrc; then
@@ -117,11 +128,12 @@ finalize_zsh_setup() {
 }
 
 # Install Zsh and setup environment variables
+log_message "${DEBUG}" "# Step 1: Install Zsh and Oh My Zsh"
 install_zsh
 install_ohmyzsh
 install_ohmyzsh_plugins
 install_powerlevel10k
-finalize_zsh_setup
+finalise_zsh_setup
 
 # Call the setup_environment_variables script to ensure PATH is updated
 setup_environment_variables
