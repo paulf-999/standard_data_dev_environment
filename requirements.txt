@@ -1,65 +1,52 @@
 # dbt-Related Libraries
-dbt-core==1.9.0
-dbt-snowflake==1.9.0
+dbt-core==1.9.4  # https://pypi.org/project/dbt-core/
+dbt-snowflake==1.9.4  # https://pypi.org/project/dbt-snowflake/
 
 # SQLFluff libraries
 sqlfluff-templater-dbt==3.3.0  # https://pypi.org/project/sqlfluff-templater-dbt/
-sqlfluff==3.3.0 # https://pypi.org/project/sqlfluff/
+sqlfluff==3.3.0  # https://pypi.org/project/sqlfluff/
 
 # Azure libs
-azure.identity==1.13.0
-azure.keyvault.secrets==4.7.0
+azure.identity
+azure.keyvault.secrets
 
 # Commonly Used/CLI libraries
-awscliv2==2.2.0
-boto3==1.26.70  # AWS SDK for Python
-charset-normalizer==2.1.1  # helps with character encoding - used to detect and convert character set encoding
-certifi==2020.12.5  #  collection of Root Certificates for validating SSL certificates
-idna==2.9  # IDNA refers to Internationalized Domain Names in Applications. This library allows your Python app to work with such domain names
-j2cli==0.3.10  # command-line interface to Jinja2 for templating in shell scripts.
-Jinja2==3.1.3 # command-line interface to Jinja2 for templating in shell scripts.
-pre-commit==3.1.1  # A framework for managing and maintaining multi-language pre-commit hooks.
-pytest==7.2.1  # Simple, robust testing with Python
-python-dateutil==2.8.2  # provides powerful extensions to the standard datetime module.
-python-dotenv==1.0.0  # Read key-value pairs from a .env file and set them as environment variables
-pyyaml==6.0  # YAML parser and emitter for Python
-requests==2.31.0  # simple HTTP library for Python
-s3transfer==0.6.0  # library for managing Amazon S3 transfers
-s3fs==0.4.2  # a Pythonic file interface to S3. It allows you to work with S3 as if it were a file system
-setuptools==59.6.0  # essential for Python development, Setuptools is a collection of enhancements to the Python distutils for easily building and distributing Python packages
-snowflake-connector-python==3.12.4  # Snowflake Connector for Python
-snowflake-sqlalchemy==1.5.0  # Snowflake SQLAlchemy Dialect
-typing-extensions==4.9.0  # introduces new types for the Python typing system
-urllib3==1.26.19  # HTTP client for Python
-virtualenv==20.19.0  # Virtual Python Environment builder
-virtualenvwrapper==4.8.4  # Set of extensions for virtualenv. These include wrappers for creating/deleting virtual environments - making it easier to work on multiple projects without introducing conflicts in their dependencies.
-wget==3.2  # Pure Python download utility
-wheel==0.37.1  # a built-package format for Python, making it easier to distribute Python software
-yq==3.1.0  # Command-line YAML/XML processor - jq wrapper for YAML/XML documents
+awscliv2
+boto3  # AWS SDK for Python
+j2cli  # command-line interface to Jinja2 for templating in shell scripts.
+Jinja2  # command-line interface to Jinja2 for templating in shell scripts.
+pre-commit  # A framework for managing and maintaining multi-language pre-commit hooks.
+pytest  # Simple, robust testing with Python
+python-dateutil  # provides powerful extensions to the standard datetime module.
+python-dotenv  # Read key-value pairs from a .env file and set them as environment variables
+pyyaml  # YAML parser and emitter for Python
+requests  # simple HTTP library for Python
+s3transfer  # library for managing Amazon S3 transfers
+s3fs  # a Pythonic file interface to S3. It allows you to work with S3 as if it were a file system
+setuptools  # essential for Python development, Setuptools is a collection of enhancements to the Python distutils for easily building and distributing Python packages
+snowflake-connector-python==3.15.0  # Snowflake Connector for Python
+urllib3  # HTTP client for Python
+virtualenv  # Virtual Python Environment builder
+virtualenvwrapper  # Set of extensions for virtualenv. These include wrappers for creating/deleting virtual environments - making it easier to work on multiple projects without introducing conflicts in their dependencies.
+wget  # Pure Python download utility
+wheel  # a built-package format for Python, making it easier to distribute Python software
+yq  # Command-line YAML/XML processor - jq wrapper for YAML/XML documents
 
 # Code Quality libraries
-black==23.9.1  # The uncompromising code formatter.
-flake8==6.0.0  # The modular source code checker: pep8 pyflakes and co
-pylint==2.16.2  # Python code static checker
+black  # The uncompromising code formatter.
+flake8  # The modular source code checker: pep8 pyflakes and co
+pylint  # Python code static checker
 
 # Database-Related Libraries
-pymssql==2.3.0  # DB-API interface to Microsoft SQL Server for Python.
-pyodbc==4.0.35  # pyodbc is an open-source Python module that makes accessing ODBC databases simple.
-sqlalchemy==1.4.48  # Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL
+pymssql  # DB-API interface to Microsoft SQL Server for Python.
+pyodbc  # pyodbc is an open-source Python module that makes accessing ODBC databases simple.
+sqlalchemy  # Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL
 
 # File Parsing libraries
-numpy==1.24.4  # fundamental package for scientific computing in Python
-openpyxl==3.1.1  # Python library to read/write Excel 2010 xlsx/xlsm files
-pandas==1.5.3  # Powerful data structures for data analysis, time series, and statistics
+numpy  # fundamental package for scientific computing in Python
+openpyxl  # Python library to read/write Excel 2010 xlsx/xlsm files
+pandas  # Powerful data structures for data analysis, time series, and statistics
 
-# Airflow-Related Libraries
-apache-airflow==2.10.0
-gunicorn==20.1.0
-pendulum==2.1.2
-pyarrow==10.0.1
-pylint-airflow==0.1.0a1
-
-# General Purpose/Other Libraries
-diagrams==0.23.3
-Faker==17.0.0
-humanfriendly==10.0
+# General Purpose
+diagrams
+Faker
