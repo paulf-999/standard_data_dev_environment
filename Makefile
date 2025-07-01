@@ -15,31 +15,27 @@ SHELL = /bin/sh
 # load variables from separate file
 include src/make/variables.mk # load variables from a separate makefile file
 
-CONFIG_FILE := config.yaml
+# path to the directory containing setup scripts
+SETUP_SCRIPTS_DIR := src/sh/setup_scripts
 
 #=======================================================================
 # Targets
 #=======================================================================
 all: deps install clean
 
+# To find this the value for the PATH variable, run $(python3 -m site --user-base)/bin
 deps:
 	# Prerequisite: Add Python user binary path to PATH, e.g.: /Users/paulfry/Library/Python/3.9/bin
-	# To find this path, run $(python3 -m site --user-base)/bin
 	# E.g., command to run: export PATH=$PATH:$HOME/Library/Python/3.9/bin
 	@echo "${INFO}\nCalled makefile target 'deps'. Download and install required libraries and dependencies.${COLOUR_OFF}"
 	@bash src/sh/setup_scripts/ohmyzsh/install_ohmyzsh.sh
 	@bash src/sh/setup_scripts/setup_environment_variables.sh
 
 install:
-	@echo "${INFO}\nCalled makefile target 'install'.${COLOUR_OFF}"
-	@echo "${DEBUG}\nStep 1: Install Unix packages'.${COLOUR_OFF}"
-	@bash src/sh/setup_scripts/install_unix_packages.sh
-	@echo "${DEBUG}\nStep 2: Install Python and pip.${COLOUR_OFF}"
-	@bash src/sh/setup_scripts/install_python_and_pip.sh
-	@echo "${DEBUG}\nStep 3: Install Python packages.${COLOUR_OFF}"
-	@bash src/sh/setup_scripts/install_python_packages.sh
-	@echo "${DEBUG}\nStep 4: Configure development tools.${COLOUR_OFF}"
-	@bash src/sh/setup_scripts/configure_dev_tools.sh
+	@echo "${INFO}\nStep 1: Install Unix packages${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_unix_packages.sh
+	@# @echo "${INFO}\nStep 2: Install Python and pip${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_python_and_pip.sh
+	@# @echo "${INFO}\nStep 3: Install Python packages${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_python_packages.sh
+	@# @echo "${INFO}\nStep 4: Configure development tools${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/configure_dev_tools.sh
 
 run:
 	@echo "${INFO}\nCalled makefile target 'run'. Launch service.${COLOUR_OFF}"

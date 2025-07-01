@@ -10,52 +10,56 @@
 # Variables
 #=======================================================================
 
-# Source shell_utils.sh relative to this script
-source "${SHELL_UTILS_PATH}"
+# Inputs
+ROOT_DIR=$(pwd)
+IP_CONFIG_DIR="${ROOT_DIR}/config"
 
-# List of packages to skip on macOS
-MAC_OS_SKIP_PACKAGES=("build-essential" "openjdk-11-jre" "ruby-full" "wslu")
+# Source shell_utils.sh relative to this script
+source "${ROOT_DIR}/src/sh/shell_utils.sh"
 
 UNIX_PACKAGES_TXT_PATH="${IP_CONFIG_DIR}/tools/unix_packages.txt"
 
 #=======================================================================
-# Helper Functions
+# Functions
 #=======================================================================
 
-# Function to update Unix packages
-update_unix_packages() {
+# Function to install Unix packages
+install_unix_packages_linux() {
+
+    # Update Unix packages
     log_message "${DEBUG_DETAILS}" "Updating Unix package list..."
     sudo apt-get -yqq update || {
         log_message "${ERROR}" "Failed to update Unix packages."
         exit 1
     }
-}
 
-# Function to install Unix packages
-install_unix_packages_linux() {
     # log_message "${DEBUG_DETAILS}" "Installing Unix packages..."
-    sudo apt -yqq install "$(cat ${UNIX_PACKAGES_TXT_PATH})" || {
+    sudo apt -yqq install "$(cat "${UNIX_PACKAGES_TXT_PATH}")" || {
         log_message "${ERROR}" "Failed to install Unix packages via apt."
-        exit 1
-    }
-}
-
-# Function to install development tools for macOS
-install_dev_tools_macos() {
-    # log_message "${DEBUG_DETAILS}" "Installing development tools on macOS..."
-    brew install gcc make > /dev/null 2>&1 || {
-        log_message "${ERROR}" "Failed to install macOS development tools."
         exit 1
     }
 }
 
 # Function to install packages on macOS using Homebrew
 install_unix_packages_macos() {
-    # log_message "${DEBUG_DETAILS}" "Installing Unix-like packages on macOS..."
 
-    # Install other packages listed in the unix_packages.txt (excluding those in MAC_OS_SKIP_PACKAGES)
+    log_message "${DEBUG}" "i. Prerequisite step: update Homebrew\n"
+    brew update > /dev/null # Ensure Homebrew is up-to-date
+
+    # Install development tools for macOS
+    log_message "${DEBUG}" "ii. Installing macOS dev tools using Homebrew"
+    brew install gcc make > /dev/null 2>&1 || {
+        log_message "${ERROR}" "Failed to install macOS development tools."
+        exit 1
+    }
+
+    # List of packages to skip on macOS
+    MAC_OS_SKIP_PACKAGES=("build-essential" "openjdk-11-jre" "ruby-full" "wslu")
+
+    # Install other packages listed in the unix_packages.txt (excluding those in ${MAC_OS_SKIP_PACKAGES})
+    log_message "${DEBUG}" "iii. Install unix packages listed in unix_packages.txt"
     while read -r package; do
-        # Check if the package is in the MAC_OS_SKIP_PACKAGES array
+        # Check if the package is in the ${MAC_OS_SKIP_PACKAGES} array
         package_found=false
         for skip_package in "${MAC_OS_SKIP_PACKAGES[@]}"; do
             if [[ "$skip_package" == "$package" ]]; then
@@ -74,25 +78,22 @@ install_unix_packages_macos() {
             log_message "${ERROR}" "Failed to install package: $package via Homebrew."
             exit 1
         fi
-    done < ${UNIX_PACKAGES_TXT_PATH}
+
+    done < "${UNIX_PACKAGES_TXT_PATH}"
 }
 
 # Function to install Unix packages (Master function)
 install_unix_packages() {
 
-    # Inform the user about the sudo password prompt
-    log_message "${DEBUG_DETAILS}" "Note: You will be prompted for your sudo password during package installation."
-
     # Check for OS and use appropriate package manager
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        update_unix_packages       # Step 1: Update Unix packages
+        log_message "${DEBUG_DETAILS}" "- Operating System: Linux"
+        log_message "${DEBUG_DETAILS}" "- Note: You will be prompted for your sudo password during package installation."
         install_unix_packages_linux  # Step 2: Install packages using apt
 
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        log_message "${DEBUG_DETAILS}" "Prerequisite step: update Homebrew"
-        brew update  # Ensure Homebrew is up-to-date
-
-        install_dev_tools_macos  # Step 1: Install macOS development tools
+        log_message "${DEBUG_DETAILS}" "- Operating System: Mac"
+        log_message "${DEBUG_DETAILS}" "- Note: You will be prompted for your sudo password during package installation."
         install_unix_packages_macos  # Step 2: Install packages using Homebrew
 
     else
@@ -106,3 +107,5 @@ install_unix_packages() {
 #=======================================================================
 
 install_unix_packages
+
+log_message "${INFO}" "Unix package installation complete!\n"
