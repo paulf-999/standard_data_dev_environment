@@ -91,13 +91,6 @@ repos:
             name: Python checks — Docstrings coverage
             args: [--quiet, --fail-under=90]
 
-  # ✅ Secrets scanning - prevent accidental secrets commits
-    - repo: https://github.com/Yelp/detect-secrets
-      rev: v1.4.0
-      hooks:
-          - id: detect-secrets
-            name: Security — Scan for secrets
-
   # ✅ Run Python tests before committing
   # - repo: https://github.com/pytest-dev/pytest
   #   rev: v8.4.1
@@ -123,3 +116,10 @@ repos:
             name: General checks - any string case conflicts?
           - id: detect-private-key # checks for the existence of private keys.
             name: General checks - private key added?
+
+  # ✅ Secrets scanning - prevent accidental secrets commits
+    - repo: https://github.com/Yelp/detect-secrets
+      rev: v1.4.0
+      hooks:
+          - id: detect-secrets
+            name: General checks — scan for secrets
