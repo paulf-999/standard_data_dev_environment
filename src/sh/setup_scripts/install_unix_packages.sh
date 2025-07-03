@@ -57,7 +57,7 @@ install_unix_packages_macos() {
     MAC_OS_SKIP_PACKAGES=("build-essential" "openjdk-11-jre" "ruby-full" "wslu")
 
     # Install other packages listed in the unix_packages.txt (excluding those in ${MAC_OS_SKIP_PACKAGES})
-    log_message "${DEBUG}" "iii. Install unix packages listed in unix_packages.txt"
+    log_message "${DEBUG}" "iii. Install unix packages listed in ${UNIX_PACKAGES_TXT_PATH}"
     while read -r package; do
         # Check if the package is in the ${MAC_OS_SKIP_PACKAGES} array
         package_found=false
