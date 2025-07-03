@@ -29,18 +29,16 @@ To set up your development environment, follow these steps:
 
 The following tools and technologies will be installed and configured during the setup:
 
-
-| **Tool/Technology**      | **Category**          | **Description**                                                                 |
-|--------------------------|-----------------------|---------------------------------------------------------------------------------|
-| **Environment Variables** | **Core Setup**        | Configuration for environment variables across shell configurations (Bash, Zsh, etc.). |
-| **Unix Packages**         | **Core Setup**        | Baseline tools and utilities required for your development environment (see `config/tools/unix_packages.txt`). |
-| **Python & Pip**          | **Core Setup**        | Python and `pip` for managing Python packages.                                   |
-| **Python Packages**       | **Core Setup**        | A set of essential Python packages (see `requirements.txt`).                     |
-| **Zsh**                   | **Core Setup**        | A shell for your development environment.                                       |
-| **Oh My Zsh**             | **Tool Configuration**       | A framework for managing Zsh configurations.                                     |
-| **VSCode Extensions**     | **Tool Configuration**              | A suite of extensions for enhancing the VSCode editor (see `src/sh/setup_scripts/vscode/configure_vscode.sh`). |
-| **VSCode `settings.json`**       | **Tool Configuration**              | A standard `settings.json` for VSCode (see `config/templates/settings.json.template`). |
-| **SQLFluff**              | **Tool**              | A tool for linting SQL files to ensure code quality.                             |
+| **Tool/Technology**              | **Category**        | **Description**                                                      |
+| -------------------------------- | ------------------- | -------------------------------------------------------------------- |
+| **Environment Variables**        | Core Setup          | Configures environment variables across shells (Bash, Zsh, etc.).    |
+| **Unix Packages**                | Core Setup          | Installs baseline CLI tools (see `config/tools/unix_packages.txt`).  |
+| **Python & Pip**                 | Core Setup          | Installs Python and `pip` for managing packages.                     |
+| **Python Packages**              | Core Setup          | Installs essentials from `requirements.txt`, including `ruff`.       |
+| **Zsh & Oh My Zsh**              | Core Setup / Config | Zsh shell plus Oh My Zsh for managing shell configurations.          |
+| **VSCode Extensions** | Tool Config         | Installs standard extensions and applies a standard `settings.json`. |
+| **SQLFluff**                     | Tool                | Lints SQL files to enforce style and quality.                        |
+| **Ruff**                         | Tool                | Fast Python linter, formatter, and import sorter — all in one.       |
 
 ### Background : What are the Commands `make deps` & `make install` Doing?
 
@@ -68,13 +66,14 @@ After running `make deps`, you need to run `make install` to complete the instal
 
 Running `make install` executes `src/sh/setup_environment.sh`, which performs the following:
 
-| **Step**                            | **Description**                                                                                                                                               |
-|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Installs Baseline Unix Packages** | Installs essential Unix packages (as listed in `config/tools/unix_packages.txt`).                                                                              |
-| **Installs Python & Pip**           | Installs Python and `pip` to manage Python packages.                                                                                                          |
-| **Installs Python Packages**        | Installs a suite of Python packages listed in `requirements.txt` at the root of the repository.                                                               |
-| **Installs VSCode Extensions**     | Installs a suite of VSCode extensions (as detailed in `src/sh/setup_scripts/vscode/configure_vscode.sh`) and applies a standard `settings.json` file.         |
-| **Installs SQLFluff**               | Installs the SQLFluff package for linting SQL files.                                                                                                          |
+| **Step**                         | **Description**                                                                              |
+| -------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Baseline Unix Packages**       | Installs essential CLI tools (see `config/tools/unix_packages.txt`).                         |
+| **Python & Pip**                 | Installs Python and `pip`.                                                                   |
+| **Python Packages**              | Installs packages from `requirements.txt` — includes `ruff` for Python linting & formatting. |
+| **VSCode Extensions & Settings** | Installs standard extensions and applies the `settings.json` template.                       |
+| **SQLFluff**                     | Lints SQL files for consistent style.                                                        |
+| **Ruff**                         | Provides fast linting, formatting, and import sorting for Python code.                       |                                                                                                       |
 
 </details><br/>
 
