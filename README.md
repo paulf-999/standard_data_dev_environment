@@ -38,7 +38,6 @@ The following tools and technologies will be installed and configured during the
 | **Zsh & Oh My Zsh**              | Core Setup / Config | Zsh shell plus Oh My Zsh for managing shell configurations.          |
 | **VSCode Extensions** | Tool Config         | Installs standard extensions and applies a standard `settings.json`. |
 | **SQLFluff**                     | Tool                | Lints SQL files to enforce style and quality.                        |
-| **Ruff**                         | Tool                | Fast Python linter, formatter, and import sorter — all in one.       |
 
 ### Background : What are the Commands `make deps` & `make install` Doing?
 
@@ -73,8 +72,6 @@ Running `make install` executes `src/sh/setup_environment.sh`, which performs th
 | **Python Packages**              | Installs packages from `requirements.txt` — includes `ruff` for Python linting & formatting. |
 | **VSCode Extensions & Settings** | Installs standard extensions and applies the `settings.json` template.                       |
 | **SQLFluff**                     | Lints SQL files for consistent style.                                                        |
-| **Ruff**                         | Provides fast linting, formatting, and import sorting for Python code.                       |                                                                                                       |
-
 </details><br/>
 
 By following these steps, you'll have a Unix-based development environment ready to use, empowering you to work seamlessly with a variety of data tools originally designed for Linux systems.
