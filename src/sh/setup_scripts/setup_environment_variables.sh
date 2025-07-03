@@ -58,7 +58,7 @@ setup_zsh() {
             log_message "${DEBUG_DETAILS}" "Reloading .zshrc for Zsh session..."
             source ~/.zshrc
         else
-            log_message "${DEBUG_DETAILS}" "Not in Zsh shell. Starting a new Zsh shell to reload .zshrc."
+            log_message "${DEBUG_DETAILS}" "Not in Zsh shell. Starting a new Zsh shell to reload .zshrc.\n"
             exec zsh -c "source ~/.zshrc; exec zsh"
         fi
     else
@@ -99,6 +99,7 @@ setup_bash() {
 #=======================================================================
 
 # Set up environment variables for both Zsh and Bash
+log_message "${DEBUG}" "# Step 2: Set up environment variables for Zsh"
 setup_zsh
 setup_bash
 

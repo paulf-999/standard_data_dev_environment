@@ -1,0 +1,36 @@
+# ========================================
+# Ruff Configuration
+# ========================================
+[tool.ruff]
+# Global Ruff settings
+line-length = 120  # Matches your pre-commit arg
+
+# Pin Python version (e.g., for syntax checks)
+target-version = "py310"
+
+# ========================================
+# Ruff Linting Rules
+# ========================================
+[tool.ruff.lint]
+# Default rule families
+# E = pycodestyle (PEP8)
+# F = Pyflakes
+# W = pycodestyle warnings
+# C90 = McCabe complexity
+select = ["E", "F", "W", "C90"]
+
+# Optional: ignore specific codes
+ignore = []
+
+# ========================================
+# Ruff Import Sorter (isort replacement)
+# ========================================
+[tool.ruff.lint.isort]
+# Use defaults unless you want custom sections/order.
+# Example customisation: known_first_party = ["your_package_name"]
+
+# ========================================
+# Ruff Formatter (Black-compatible)
+# ========================================
+[tool.ruff.format]
+quote-style = "single"
