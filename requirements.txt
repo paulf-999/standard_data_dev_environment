@@ -32,10 +32,9 @@ wget  # Pure Python download utility
 wheel  # a built-package format for Python, making it easier to distribute Python software
 yq  # Command-line YAML/XML processor - jq wrapper for YAML/XML documents
 
-# Code Quality libraries
-black  # The uncompromising code formatter.
-flake8  # The modular source code checker: pep8 pyflakes and co
-pylint  # Python code static checker
+# Python Code Quality libraries
+ruff  # Ultra-fast linter, formatter, and import sorter for Python (written in Rust)
+pylint  # Python code static checker for advanced checks
 
 # Database-Related Libraries
 pymssql  # DB-API interface to Microsoft SQL Server for Python.
