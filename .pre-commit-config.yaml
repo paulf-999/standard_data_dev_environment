@@ -91,13 +91,6 @@ repos:
             name: Python checks — Docstrings coverage
             args: [--quiet, --fail-under=90]
 
-  # ✅ Run Python tests before committing
-  # - repo: https://github.com/pytest-dev/pytest
-  #   rev: v8.4.1
-  #   hooks:
-  #     - id: pytest
-  #       name: Tests — Run pytest
-
   # General/housekeeping hooks
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.4.0
