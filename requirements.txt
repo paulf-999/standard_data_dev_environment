@@ -1,6 +1,7 @@
 # dbt-Related Libraries
 dbt-core==1.9.4  # https://pypi.org/project/dbt-core/
 dbt-snowflake==1.9.4  # https://pypi.org/project/dbt-snowflake/
+snowflake-connector-python==3.15.0  # Snowflake Connector for Python
 
 # SQLFluff libraries
 sqlfluff-templater-dbt==3.3.0  # https://pypi.org/project/sqlfluff-templater-dbt/
@@ -24,7 +25,6 @@ requests  # simple HTTP library for Python
 s3transfer  # library for managing Amazon S3 transfers
 s3fs  # a Pythonic file interface to S3. It allows you to work with S3 as if it were a file system
 setuptools  # essential for Python development, Setuptools is a collection of enhancements to the Python distutils for easily building and distributing Python packages
-snowflake-connector-python==3.15.0  # Snowflake Connector for Python
 urllib3  # HTTP client for Python
 virtualenv  # Virtual Python Environment builder
 virtualenvwrapper  # Set of extensions for virtualenv. These include wrappers for creating/deleting virtual environments - making it easier to work on multiple projects without introducing conflicts in their dependencies.
