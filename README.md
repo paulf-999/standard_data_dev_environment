@@ -1,6 +1,6 @@
 # Standard Data Dev Environment
 
-This repository contains automation scripts intended to set up and enhance developers' environments for data tools on Linux systems.
+This repository contains automation scripts intended to set up a standardised developer environments for data tools on Linux systems.
 
 ---
 
