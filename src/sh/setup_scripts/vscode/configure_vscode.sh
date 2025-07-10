@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#=======================================================================
-# Variables
-#=======================================================================
+# Inputs
+ROOT_DIR=$(pwd)
 
 # Source shell_utils.sh relative to this script
-source "${SHELL_UTILS_PATH}"
+source "${ROOT_DIR}/src/sh/shell_utils.sh"
+
 source "${SETUP_SCRIPTS_DIR}/vscode/vscode_extensions_list.sh"
 
 # Array of extension categories (used as indices for arrays)
@@ -86,7 +86,7 @@ configure_vscode_settings_json() {
 # Loop through the categories and install extensions
 for category in "${EXTENSIONS_CATEGORIES[@]}"; do
     # Log the message for each category
-    log_message "${DEBUG_DETAILS}" "Installing ${category} extensions"
+    log_message "${DEBUG_DETAILS}" "- Installing ${category} extensions"
 
     # Install the extensions based on the category
     if [[ "$category" == "Python" ]]; then

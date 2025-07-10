@@ -1,18 +1,17 @@
 #!/bin/bash
 
-#=======================================================================
-# Function Name: install_unix_packages
-# Description: Installs Python & Pip for differing Unix OSs.
-#=======================================================================
+# Inputs
+ROOT_DIR=$(pwd)
 
 # Source shell_utils.sh relative to this script
-source "${SHELL_UTILS_PATH}"
+source "${ROOT_DIR}/src/sh/shell_utils.sh"
 
 #=======================================================================
 # Helper Functions
 #=======================================================================
 
-# Function to install Python and pip
+# Function Name: install_python_and_pip
+# Description: Installs Python & Pip for differing Unix OSs.
 install_python_and_pip() {
 
     # Check the OS type
@@ -43,7 +42,7 @@ install_python_and_pip() {
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         # macOS: Check if Python 3 is already installed
         if command -v python3 &>/dev/null; then
-            log_message "${DEBUG_DETAILS}" "Python3 is already installed on macOS - skipping installation."
+            log_message "${DEBUG_DETAILS}" "- Python3 is already installed on macOS - skipping installation."
         else
             # macOS uses Homebrew to install Python if not already installed
             brew install python || {
@@ -63,7 +62,7 @@ install_python_and_pip() {
             }
             rm get-pip.py
         else
-            log_message "${DEBUG_DETAILS}" "pip3 is already installed - skipping installation."
+            log_message "${DEBUG_DETAILS}" "- pip3 is already installed - skipping installation.\n"
         fi
     else
         log_message "${ERROR}" "Unsupported OS detected for Python and pip installation."
