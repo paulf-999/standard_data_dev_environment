@@ -1,7 +1,9 @@
 #!/bin/bash
 
+
 # Inputs
 ROOT_DIR=$(pwd)
+TEMPLATES_DIR="${ROOT_DIR}/config/templates"
 
 # Source shell_utils.sh relative to this script
 source "${ROOT_DIR}/src/sh/shell_utils.sh"
@@ -22,13 +24,14 @@ configure_dev_tools() {
     }
 
     # Configure SQLFluff using jinja2 template
-    log_message "${DEBUG}" "4.2. Configure SQLFluff"
+    log_message "${DEBUG}" "4.2. Configure SQLFluff\n"
     # To avoid any potential issue, we'll update the PATH for the current shell session
     export PATH="${PATH}:${LOCAL_BIN_PATH}:${PYTHON_BIN_PATH}"
     j2 "${TEMPLATES_DIR}"/.sqlfluff_template.j2 -o ~/.sqlfluff || {
         log_message "${ERROR}" "Error: Failed to configure SQLFluff."
         exit 1
     }
+    log_message "${INFO}" "Dev tool config complete!\n"
 }
 
 #=======================================================================

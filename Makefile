@@ -33,9 +33,9 @@ deps:
 
 install:
 	@echo "${INFO}\nStep 1: Install Unix packages${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_unix_packages.sh
-	@# @echo "${INFO}\nStep 2: Install Python and pip${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_python_and_pip.sh
-	@# @echo "${INFO}\nStep 3: Install Python packages${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_python_packages.sh
-	@# @echo "${INFO}\nStep 4: Configure development tools${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/configure_dev_tools.sh
+	@echo "${INFO}\nStep 2: Install Python and pip${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_python_and_pip.sh
+	@echo "${INFO}\nStep 3: Install Python packages${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/install_python_packages.sh
+	@echo "${INFO}\nStep 4: Configure development tools${COLOUR_OFF}" && bash $(SETUP_SCRIPTS_DIR)/configure_dev_tools.sh
 
 run:
 	@echo "${INFO}\nCalled makefile target 'run'. Launch service.${COLOUR_OFF}"

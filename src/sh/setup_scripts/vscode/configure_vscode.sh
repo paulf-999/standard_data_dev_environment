@@ -2,6 +2,7 @@
 
 # Inputs
 ROOT_DIR=$(pwd)
+TEMPLATES_DIR="${ROOT_DIR}/config/templates"
 
 # Source shell_utils.sh relative to this script
 source "${ROOT_DIR}/src/sh/shell_utils.sh"
@@ -9,9 +10,7 @@ source "${ROOT_DIR}/src/sh/shell_utils.sh"
 source "${SETUP_SCRIPTS_DIR}/vscode/vscode_extensions_list.sh"
 
 # Array of extension categories (used as indices for arrays)
-# EXTENSIONS_CATEGORIES=("Python" "Data-Tooling" "Formatting" "Miscellaneous")
-# TODO - undo
-EXTENSIONS_CATEGORIES=("Python")
+EXTENSIONS_CATEGORIES=("Python" "Data-Tooling" "Formatting" "Miscellaneous")
 
 #=======================================================================
 # Functions
@@ -27,14 +26,16 @@ install_extensions() {
 }
 
 uninstall_extensions() {
-    local extensions=("$@")  # Array of extensions
+
+    log_message "${DEBUG_DETAILS}" "- Uninstalling Python extensions"
+
+    local extensions=("$@")
     for extension in "${extensions[@]}"; do
         if ! code --extensions-dir "${HOME}/.vscode/extensions" --uninstall-extension "${extension}" &>/dev/null; then
             if code --list-extensions | grep -q "${extension}"; then
                 print_error_message "Error: Failed to uninstall VSCode extension: ${extension}. Please check if it's installed correctly."
-            else
-                print_error_message "Warning: VSCode extension ${extension} was not installed, skipping uninstall."
             fi
+            # Else: was not installed → do nothing.
         fi
     done
 }
@@ -84,8 +85,6 @@ configure_vscode_settings_json() {
 #=======================================================================
 # Main Script Logic
 #=======================================================================
-
-log_message "${DEBUG_DETAILS}" "Uninstalling Python extensions"
 
 if [ "${#EXTENSIONS_TO_UNINSTALL[@]}" -eq 0 ]; then
   log_message "${DEBUG_DETAILS}" "No extensions to uninstall."
