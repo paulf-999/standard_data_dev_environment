@@ -1,11 +1,12 @@
 #!/bin/bash
 
-#=======================================================================
-# Variables
-#=======================================================================
+# Inputs
+ROOT_DIR=$(pwd)
+TEMPLATES_DIR="${ROOT_DIR}/config/templates"
 
 # Source shell_utils.sh relative to this script
-source "${SHELL_UTILS_PATH}"
+source "${ROOT_DIR}/src/sh/shell_utils.sh"
+
 source "${SETUP_SCRIPTS_DIR}/vscode/vscode_extensions_list.sh"
 
 # Array of extension categories (used as indices for arrays)
@@ -25,14 +26,16 @@ install_extensions() {
 }
 
 uninstall_extensions() {
-    local extensions=("$@")  # Array of extensions
+
+    log_message "${DEBUG_DETAILS}" "- Uninstalling Python extensions"
+
+    local extensions=("$@")
     for extension in "${extensions[@]}"; do
         if ! code --extensions-dir "${HOME}/.vscode/extensions" --uninstall-extension "${extension}" &>/dev/null; then
             if code --list-extensions | grep -q "${extension}"; then
                 print_error_message "Error: Failed to uninstall VSCode extension: ${extension}. Please check if it's installed correctly."
-            else
-                print_error_message "Warning: VSCode extension ${extension} was not installed, skipping uninstall."
             fi
+            # Else: was not installed → do nothing.
         fi
     done
 }
@@ -83,10 +86,16 @@ configure_vscode_settings_json() {
 # Main Script Logic
 #=======================================================================
 
+if [ "${#EXTENSIONS_TO_UNINSTALL[@]}" -eq 0 ]; then
+  log_message "${DEBUG_DETAILS}" "No extensions to uninstall."
+else
+  uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}"
+fi
+
 # Loop through the categories and install extensions
 for category in "${EXTENSIONS_CATEGORIES[@]}"; do
     # Log the message for each category
-    log_message "${DEBUG_DETAILS}" "Installing ${category} extensions"
+    log_message "${DEBUG_DETAILS}" "- Installing ${category} extensions"
 
     # Install the extensions based on the category
     if [[ "$category" == "Python" ]]; then
@@ -99,9 +108,6 @@ for category in "${EXTENSIONS_CATEGORIES[@]}"; do
         install_extensions "${EXTENSIONS_MISC[@]}"
     fi
 done
-
-log_message "${DEBUG_DETAILS}" "Uninstalling Python extensions"
-uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}"
 
 # Configure settings.json
 configure_vscode_settings_json
