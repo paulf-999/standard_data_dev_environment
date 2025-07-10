@@ -9,7 +9,9 @@ source "${ROOT_DIR}/src/sh/shell_utils.sh"
 source "${SETUP_SCRIPTS_DIR}/vscode/vscode_extensions_list.sh"
 
 # Array of extension categories (used as indices for arrays)
-EXTENSIONS_CATEGORIES=("Python" "Data-Tooling" "Formatting" "Miscellaneous")
+# EXTENSIONS_CATEGORIES=("Python" "Data-Tooling" "Formatting" "Miscellaneous")
+# TODO - undo
+EXTENSIONS_CATEGORIES=("Python")
 
 #=======================================================================
 # Functions
@@ -83,6 +85,14 @@ configure_vscode_settings_json() {
 # Main Script Logic
 #=======================================================================
 
+log_message "${DEBUG_DETAILS}" "Uninstalling Python extensions"
+
+if [ "${#EXTENSIONS_TO_UNINSTALL[@]}" -eq 0 ]; then
+  log_message "${DEBUG_DETAILS}" "No extensions to uninstall."
+else
+  uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}"
+fi
+
 # Loop through the categories and install extensions
 for category in "${EXTENSIONS_CATEGORIES[@]}"; do
     # Log the message for each category
@@ -99,9 +109,6 @@ for category in "${EXTENSIONS_CATEGORIES[@]}"; do
         install_extensions "${EXTENSIONS_MISC[@]}"
     fi
 done
-
-log_message "${DEBUG_DETAILS}" "Uninstalling Python extensions"
-uninstall_extensions "${EXTENSIONS_TO_UNINSTALL[@]}"
 
 # Configure settings.json
 configure_vscode_settings_json

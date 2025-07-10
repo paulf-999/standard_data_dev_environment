@@ -103,9 +103,59 @@ install_unix_packages() {
 }
 
 #=======================================================================
+# Ensure VS Code 'code' CLI is in PATH (macOS & Linux)
+#=======================================================================
+
+ensure_vscode_cli_in_path() {
+  log_message "${DEBUG_DETAILS}" "Ensuring VS Code 'code' CLI is in PATH..."
+
+  if command -v code &>/dev/null; then
+    log_message "${INFO}" "'code' CLI is already in PATH."
+    return
+  fi
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS default path for VS Code CLI
+    VSCODE_BIN="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+    if [ -f "$VSCODE_BIN" ]; then
+      ln -sf "$VSCODE_BIN" "/usr/local/bin/code"
+      log_message "${INFO}" "Symlinked VS Code CLI to /usr/local/bin/code"
+    else
+      log_message "${ERROR}" "VS Code CLI binary not found at expected location: $VSCODE_BIN"
+      exit 1
+    fi
+
+  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Check common install locations for VS Code
+    if [ -f "/usr/bin/code" ]; then
+      log_message "${INFO}" "'code' CLI exists at /usr/bin/code but not in PATH — check your shell config."
+    elif [ -f "/usr/local/bin/code" ]; then
+      log_message "${INFO}" "'code' CLI exists at /usr/local/bin/code but not in PATH — check your shell config."
+    else
+      log_message "${ERROR}" "'code' CLI not found. Did you install VS Code?"
+      exit 1
+    fi
+  else
+    log_message "${ERROR}" "Unsupported OS for VS Code CLI setup."
+    exit 1
+  fi
+
+  # Confirm it's now accessible
+  if ! command -v code &>/dev/null; then
+    log_message "${ERROR}" "'code' CLI still not in PATH. Please add it manually."
+    exit 1
+  fi
+
+  log_message "${INFO}" "'code' CLI is now available in PATH."
+}
+
+#=======================================================================
 # Main Function
 #=======================================================================
 
 install_unix_packages
+
+# Ensure VS Code CLI is available for later scripts
+ensure_vscode_cli_in_path
 
 log_message "${INFO}" "Unix package installation complete!\n"
