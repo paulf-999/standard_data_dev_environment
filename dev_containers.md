@@ -1,28 +1,30 @@
-# 🐳 Using Dev Containers
+# 🐳 Using Dev Containers (Quick Start)
 
-You can run this project inside a **Dev Container** — a pre-configured environment that includes all required tools and packages.
+1. **Start Docker Desktop**
+   Make sure Docker Desktop is installed and running before continuing.
 
-## Steps
+2. **Install the VS Code Dev Containers extension**
 
-1. **Install the VS Code Dev Containers extension**
-   In VS Code, go to the Extensions tab → search for **“Dev Containers”** → click **Install**.
+   * In VS Code, click the **Extensions** icon on the left sidebar
+   * Search for **“Dev Containers”** and install the extension (published by Microsoft).
 
-2. **Open the project**
-   Open this repository folder in VS Code.
+3. **Open this project in VS Code**
 
-3. **Reopen in Container**
-   When prompted, click **“Reopen in Container”**.
-   VS Code will build the container and automatically install all dependencies.
+   * From the top menu, select **File → Open Folder…**
+   * Choose this repository’s root folder and click **Open**.
 
-4. **Start working**
-   Once setup is complete, you’ll be in a fully configured environment.
-   You can run commands as usual, for example:
+4. **Reopen the folder in a Dev Container**
+
+   * When prompted, click **“Reopen in Container”** as shown below:
+     ![VS Code Dev Containers prompt](docs/img/devcontainers_prompt.png)
+   * If no prompt appears, open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`), type **“Dev Containers: Reopen in Container”**, and select it.
+
+5. **Start working**
+   Once the container build completes, your terminal will open inside the Dev Container.
+   You can now run commands as usual, for example:
 
    ```bash
-   python your_script.py
-   make install
+   python3 your_script.py
    ```
 
----
-
-✅ **Tip:** Everything runs inside the container — no need to install Python or packages on your machine.
+✅ **Tip:** Everything runs inside the container — no need to install Python or dependencies on your local machine.
